@@ -27,15 +27,11 @@ TOTAL: 10
 
 ## Arman Oleksandr
 #### [P244-60 Com UR vull poder crear posts](https://pds24-4c.youtrack.cloud/issue/P244-60/Com-UR-vull-poder-crear-posts)
-* [P244-81 Crear entity post](https://pds24-4c.youtrack.cloud/issue/P244-81/Crear-entity-post) 2
-* [P244-94 Crear PostRepository](https://pds24-4c.youtrack.cloud/issue/P244-94/Crear-PostRepository) 1
-* [P244-95 Crear PostService](https://pds24-4c.youtrack.cloud/issue/P244-95/Crear-PostService) 5
-* [P244-96 Crear PostController](https://pds24-4c.youtrack.cloud/issue/P244-96/Crear-PostController) 6
-* [P244-110 crear bottom nav per crear posts](https://pds24-4c.youtrack.cloud/issue/P244-110/crear-bottom-nav-per-crear-posts) 2
-* [P244-111 Interficie per dades de post i crear](https://pds24-4c.youtrack.cloud/issue/P244-111/Interficie-per-dades-de-post-i-crear) 2
-* [P244-114 Crear POST endpoint /posts/post i comunicacio android spring](https://pds24-4c.youtrack.cloud/issue/P244-114/Crear-POST-endpoint-posts-post-i-comunicacio-android-spring) 4
+* [P244-81 Spring crear elements de Post i endpoints](https://pds24-4c.youtrack.cloud/issue/P244-81/Spring-crear-elements-de-Post-i-endpoints) 13
+* [P244-110 Android bottom nav i fragment amb interficie per crear posts](https://pds24-4c.youtrack.cloud/issue/P244-110/Android-bottom-nav-i-fragment-amb-interficie-per-crear-posts) 9
 
 TOTAL: 22h
+
 
 
 # Sprint 2
