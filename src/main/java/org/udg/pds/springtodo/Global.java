@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.udg.pds.springtodo.entity.IdObject;
+import org.udg.pds.springtodo.entity.Post;
 import org.udg.pds.springtodo.entity.Tag;
 import org.udg.pds.springtodo.entity.User;
+import org.udg.pds.springtodo.service.PostService;
 import org.udg.pds.springtodo.service.TagService;
 import org.udg.pds.springtodo.service.TaskService;
 import org.udg.pds.springtodo.service.UserService;
@@ -19,6 +21,8 @@ import org.udg.pds.springtodo.service.UserService;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class Global {
@@ -30,16 +34,16 @@ public class Global {
     private final Logger logger = LoggerFactory.getLogger(Global.class);
 
     @Autowired
-    private
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    private
-    TaskService taskService;
+    private TaskService taskService;
 
     @Autowired
-    private
-    TagService tagService;
+    private TagService tagService;
+
+    @Autowired
+    private PostService postService;
 
     @Autowired
     private Environment environment;
@@ -102,6 +106,16 @@ public class Global {
             taskService.addTagsToTask(user.getId(), taskId.getId(), new ArrayList<Long>() {{
                 add(tag.getId());
             }});
+
+
+
+
+            //POSTS
+            postService.addPost(user.getId(),"titol", "descripcio", 25.5);
+            Collection<Post> p = userService.getOwnedPosts(user.getId());
+            postService.addPost(user.getId(),"titol2", "descripcio2", 24.5);
+
+
             userService.register("user", "user@hotmail.com", "0000");
         }
 

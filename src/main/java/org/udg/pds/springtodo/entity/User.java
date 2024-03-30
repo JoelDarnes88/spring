@@ -41,8 +41,16 @@ public class User implements Serializable {
   @NotNull
   private String password;
 
+
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
   private Collection<Task> tasks;
+
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "creador")
+  private Collection<Post> posts;
+
+
+
+
 
   @JsonView(Views.Private.class)
   public Long getId() {
@@ -80,5 +88,13 @@ public class User implements Serializable {
   public void addTask(Task task) {
     tasks.add(task);
   }
+
+  public void addPost(Post post) { posts.add(post); }
+
+  @JsonView(Views.Complete.class)
+  public Collection<Post> getOwneddPosts() {
+      posts.size();
+      return posts;
+    }
 
 }

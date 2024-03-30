@@ -1,8 +1,10 @@
 package org.udg.pds.springtodo.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.udg.pds.springtodo.configuration.exceptions.ServiceException;
+import org.udg.pds.springtodo.entity.Post;
 import org.udg.pds.springtodo.entity.Task;
 import org.udg.pds.springtodo.entity.User;
 import org.udg.pds.springtodo.repository.UserRepository;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -66,4 +69,10 @@ public class UserService {
         User u = this.getUser(userId);
         userRepository.delete(u);
     }
+
+    public Collection<Post> getOwnedPosts (Long userId) {
+        User u = this.getUser(userId);
+        return u.getOwneddPosts();
+    }
+
 }
