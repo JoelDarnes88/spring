@@ -100,27 +100,20 @@ public class Global {
         if (activeProfile.equals("dev")) {
             logger.info("Starting populating database ...");
 
-            User user = userService.register("usuari", "usuari@hotmail.com", "123456");
+            User user = userService.register("usuari", "Carles M.", "United Kingdom", "usuari@hotmail.com", "+44 123456789", "123456");
+            userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
             IdObject taskId = taskService.addTask("Una tasca", user.getId(), AppDateFormatter.format(ZonedDateTime.now()), AppDateFormatter.format(ZonedDateTime.now()));
             Tag tag = tagService.addTag("ATag", "Just a tag");
             taskService.addTagsToTask(user.getId(), taskId.getId(), new ArrayList<Long>() {{
                 add(tag.getId());
             }});
 
-
-
-
             //POSTS
             postService.addPost(user.getId(),"titol", "descripcio", 25.5);
             Collection<Post> p = userService.getOwnedPosts(user.getId());
             postService.addPost(user.getId(),"titol2", "descripcio2", 24.5);
-
-
-            userService.register("user", "user@hotmail.com", "0000");
         }
-
     }
-
     public String getBaseURL() {
         return BASE_URL;
     }
