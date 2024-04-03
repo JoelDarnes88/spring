@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import kotlin.text.UStringsKt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.udg.pds.springtodo.configuration.exceptions.ControllerException;
@@ -69,7 +70,7 @@ public class UserController extends BaseController {
   public String register(HttpSession session, @Valid  @RequestBody RegisterUser ru) {
 
     checkNotLoggedIn(session);
-    userService.register(ru.username, ru.email, ru.password);
+      userService.register(ru.username, ru.name, ru.country, ru.email, ru.phone_number, ru.password);
     return BaseController.OK_MESSAGE;
 
   }
@@ -102,7 +103,13 @@ public class UserController extends BaseController {
     @NotNull
     public String username;
     @NotNull
+    public String name;
+    @NotNull
+    public String country;
+    @NotNull
     public String email;
+    @NotNull
+    public String phone_number;
     @NotNull
     public String password;
   }
