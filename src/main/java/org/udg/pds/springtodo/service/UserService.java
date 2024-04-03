@@ -34,7 +34,7 @@ public class UserService {
             throw new ServiceException("Password does not match");
     }
 
-    public User register(String username, String email, String password) {
+    public User register(String username, String name, String country, String email, String phone_number, String password) {
 
         List<User> uEmail = userRepository.findByEmail(email);
         if (uEmail.size() > 0)
@@ -45,7 +45,7 @@ public class UserService {
         if (uUsername.size() > 0)
             throw new ServiceException("Username already exists");
 
-        User nu = new User(username, email, password);
+        User nu = new User(username, name, country, email, phone_number, password);
         userRepository.save(nu);
         return nu;
     }
@@ -55,7 +55,7 @@ public class UserService {
         if (uo.isPresent())
             return uo.get();
         else
-            throw new ServiceException(String.format("User with id = % dos not exists", id));
+            throw new ServiceException(String.format("User with id = % does not exists", id));
     }
 
     public User getUserProfile(long id) {
@@ -74,5 +74,4 @@ public class UserService {
         User u = this.getUser(userId);
         return u.getOwneddPosts();
     }
-
 }
