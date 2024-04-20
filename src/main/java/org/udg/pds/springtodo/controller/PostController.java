@@ -67,6 +67,14 @@ public class PostController extends BaseController {
         return postService.getPosts();
     }
 
+    @PutMapping(path="/{id}", consumes = "application/json")
+    public String updatePost(HttpSession session,@PathVariable("id") Long postId, @Valid @RequestBody PostRequest postRequest) throws Exception {
+        Long id = getLoggedUser(session);
+        postService.updatePost(id, postId, postRequest.titol, postRequest.descripcio, postRequest.preu);
+        return BaseController.OK_MESSAGE;
+    }
+
+
 
     private static class PostRequest {
         @NotNull

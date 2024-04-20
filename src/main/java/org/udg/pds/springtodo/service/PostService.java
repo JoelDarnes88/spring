@@ -66,6 +66,18 @@ public class PostService {
         else throw new ServiceException("No es pot eliminar el post");
     }
 
+    @Transactional
+    public void updatePost(Long userId, Long postId, String titol, String descripcio, Double preu) throws Exception {
+        Post post = postRepository.findById(postId)
+            .orElseThrow(() -> new Exception("Post not found"));
+        if (!post.getUser().getId().equals(userId)) {
+            throw new Exception("Unauthorized to update this post");
+        }
+        post.setTitol(titol);
+        post.setDescripcio(descripcio);
+        post.setPreu(preu);
+        postRepository.save(post);
+    }
 
 
 
