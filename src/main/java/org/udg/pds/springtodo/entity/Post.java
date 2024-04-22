@@ -64,6 +64,7 @@ public class Post implements Serializable {
     }
 
     public void setUser(User creador) {this.creador = creador;}
+    public void setDescripcio(String descripcio) {this.descripcio = descripcio;}
 
     @JsonView(Views.Public.class)
     public Double getPreu() {return preu;}

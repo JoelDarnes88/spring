@@ -59,3 +59,20 @@ Total: 21h
 * [P244-121 Obrir un post i vista en detall](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-121) 7h
 
 TOTAL: 43h
+
+
+# Sprint 2
+
+## Arman Oleksandr
+#### [P244-149 Com a UR vull veure els meus posts](https://pds24-4c.youtrack.cloud/issue/P244-149/Com-a-UR-vull-veure-els-meus-posts)
+* [P244-150 Des de perfil mostrar els meus posts](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-150) 5h
+
+#### [P244-51 Com a UR, esborrar post](https://pds24-4c.youtrack.cloud/issue/P244-51/Com-a-UR-esborrar-post)
+* [P244-151 Crear vista detall dels meus posts, botó i funcionalitat d'esborrar post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-151) 5h
+
+#### [P244-148 Com a UR vull editar un dels meus post](https://pds24-4c.youtrack.cloud/issue/P244-148/Com-a-UR-vull-editar-un-dels-meus-post)
+* [P244-153 En vista detall dels meus posts, botó i funcionalitat per d'editar el contingut del post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-153) Xh
+* [P244-160 Spring crear endpoint PUT per editar posts](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-160) 2h
+
+
+TOTAL: 12h + editar post
