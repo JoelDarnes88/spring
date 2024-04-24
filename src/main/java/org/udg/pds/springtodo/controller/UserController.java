@@ -68,11 +68,17 @@ public class UserController extends BaseController {
 
   @PostMapping(path="/register", consumes = "application/json")
   public String register(HttpSession session, @Valid  @RequestBody RegisterUser ru) {
-
     checkNotLoggedIn(session);
       userService.register(ru.username, ru.name, ru.country, ru.email, ru.phone_number, ru.password);
     return BaseController.OK_MESSAGE;
 
+  }
+
+  @PostMapping(path="/modify", consumes = "application/json")
+  public String modify(HttpSession session, @Valid  @RequestBody ModifyUser ru) {
+      Long userId = getLoggedUser(session);
+      userService.modify(userId, ru.username, ru.name, ru.country, ru.email, ru.phone_number, ru.password, ru.about_me);
+      return BaseController.OK_MESSAGE;
   }
 
   @GetMapping(path="/me")
@@ -112,6 +118,23 @@ public class UserController extends BaseController {
     public String phone_number;
     @NotNull
     public String password;
+  }
+
+  private static class ModifyUser {
+      @NotNull
+      public String username;
+      @NotNull
+      public String name;
+      @NotNull
+      public String country;
+      @NotNull
+      public String email;
+      @NotNull
+      public String phone_number;
+      @NotNull
+      public String password;
+      @NotNull
+      public String about_me;
   }
 
 }

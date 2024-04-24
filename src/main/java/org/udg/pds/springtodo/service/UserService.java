@@ -50,6 +50,19 @@ public class UserService {
         return nu;
     }
 
+    public User modify(Long userId, String username, String name, String country, String email, String phone_number, String password, String aboutMe) {
+        User nu = getUser(userId);
+        if(!username.isBlank()) nu.setUsername(username);
+        if(!name.isEmpty()) nu.setName(name);
+        if(!country.isEmpty()) nu.setCountry(country);
+        if(!email.isEmpty()) nu.setEmail(email);
+        if(!phone_number.isEmpty()) nu.setPhoneNumber(phone_number);
+        if(!password.isEmpty()) nu.setPassword(password);
+        if(!aboutMe.isEmpty()) nu.setAboutMe(aboutMe);
+        userRepository.save(nu);
+        return nu;
+    }
+
     public User getUser(Long id) {
         Optional<User> uo = userRepository.findById(id);
         if (uo.isPresent())
