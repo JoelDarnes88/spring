@@ -5,7 +5,9 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.udg.pds.springtodo.DTO.PostDTO;
 import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.service.PostService;
 
@@ -72,6 +74,12 @@ public class PostController extends BaseController {
         Long id = getLoggedUser(session);
         postService.updatePost(id, postId, postRequest.titol, postRequest.descripcio, postRequest.preu);
         return BaseController.OK_MESSAGE;
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<PostDTO>> searchPosts(@RequestParam String query) {
+        List<PostDTO> posts = postService.searchByTitol(query);
+        return ResponseEntity.ok(posts);
     }
 
 

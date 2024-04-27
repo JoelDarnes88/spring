@@ -71,8 +71,22 @@ TOTAL: 43h
 * [P244-151 Crear vista detall dels meus posts, botó i funcionalitat d'esborrar post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-151) 5h
 
 #### [P244-148 Com a UR vull editar un dels meus post](https://pds24-4c.youtrack.cloud/issue/P244-148/Com-a-UR-vull-editar-un-dels-meus-post)
-* [P244-153 En vista detall dels meus posts, botó i funcionalitat per d'editar el contingut del post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-153) Xh
+* [P244-153 En vista detall dels meus posts, botó i funcionalitat per d'editar el contingut del post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-153) 8h
 * [P244-160 Spring crear endpoint PUT per editar posts](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-160) 2h
 
+TOTAL: 20h
 
-TOTAL: 12h + editar post
+
+# Sprint 3
+
+## Arman Oleksandr
+#### [P244-176 Com UR vull poder cercar posts](https://pds24-4c.youtrack.cloud/issue/P244-176/Com-UR-vull-poder-cercar-posts)
+* [P244-181 Spring crear endpoint /posts/search?query="titol"](https://pds24-4c.youtrack.cloud/issue/P244-181/Spring-crear-endpoint-posts-searchquerytitol) 3h
+* [P244-177 Afegir barra de cerca i funcionalitat de cercar](https://pds24-4c.youtrack.cloud/issue/P244-177/Afegir-barra-de-cerca-i-funcionalitat-de-cercar) 2h
+
+
+#### [P244-180 Com UR vull poder afegir imatges en posts](https://pds24-4c.youtrack.cloud/issue/P244-180/Com-UR-vull-poder-afegir-imatges-en-posts)
+* [P244-178 Afegir imatges en posts](https://pds24-4c.youtrack.cloud/issue/P244-178/Afegir-imatges-en-posts) Xh
+* [P244-179 Modificar imatges dels meus posts](https://pds24-4c.youtrack.cloud/issue/P244-179/Modificar-imatges-dels-meus-posts) Xh
+
+TOTAL: 5 + Xh
