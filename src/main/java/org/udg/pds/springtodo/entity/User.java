@@ -76,6 +76,7 @@ public class User implements Serializable {
         return id;
     }
 
+    @JsonView(Views.Private.class)
     public void setId(Long id) {
         this.id = id;
     }
@@ -114,6 +115,10 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+    @JsonIgnore
+    public String getAbout_me() {
+        return about_me;
+    }
 
     @JsonView(Views.Complete.class)
     public Collection<Task> getTasks() {
@@ -122,6 +127,51 @@ public class User implements Serializable {
         // More: http://www.javabeat.net/jpa-lazy-eager-loading/
         tasks.size();
         return tasks;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setPhoneNumber(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setWallet(double wallet) {
+        this.wallet = wallet;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setAboutMe(String about_me) {
+        this.about_me = about_me;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setTasks(Collection<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void addTask(Task task) {
