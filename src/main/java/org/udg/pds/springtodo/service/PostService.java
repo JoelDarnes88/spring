@@ -3,6 +3,7 @@ package org.udg.pds.springtodo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.udg.pds.springtodo.DTO.PostDTO;
 import org.udg.pds.springtodo.configuration.exceptions.ServiceException;
 import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.repository.PostRepository;
@@ -10,6 +11,7 @@ import org.udg.pds.springtodo.repository.PostRepository;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -80,5 +82,10 @@ public class PostService {
     }
 
 
+    @Transactional
+    public List<PostDTO> searchByTitol(String titol) {
+        List<Post> posts = postRepository.findByTitolContainingIgnoreCase(titol);
+        return posts.stream().map(PostDTO::fromEntity).collect(Collectors.toList());
+    }
 
 }

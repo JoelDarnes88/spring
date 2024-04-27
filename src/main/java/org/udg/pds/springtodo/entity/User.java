@@ -2,9 +2,11 @@ package org.udg.pds.springtodo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "users")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"}))
 public class User implements Serializable {
     /**

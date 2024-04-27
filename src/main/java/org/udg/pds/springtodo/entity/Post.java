@@ -1,6 +1,6 @@
 package org.udg.pds.springtodo.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Setter;
@@ -8,6 +8,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity(name = "posts")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Post implements Serializable {
     /**
      * Default value included to remove warning. Remove or modify at will. *
@@ -30,6 +31,7 @@ public class Post implements Serializable {
     @NotNull
     private String descripcio;
 
+    @JsonIgnore
     @ManyToOne
     private User creador;
 
