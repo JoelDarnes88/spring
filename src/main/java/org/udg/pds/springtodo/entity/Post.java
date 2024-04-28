@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity(name = "posts")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Post implements Serializable {
     /**
      * Default value included to remove warning. Remove or modify at will. *
@@ -31,6 +31,9 @@ public class Post implements Serializable {
     @NotNull
     private String descripcio;
 
+    @NotNull
+    private Long userId;
+
     @JsonIgnore
     @ManyToOne
     private User creador;
@@ -46,13 +49,18 @@ public class Post implements Serializable {
         this.descripcio = descripcio;
         this.preu = preu;
         this.creador = creador;
+        this.userId = creador.getId();
     }
-
 
 
     @JsonView(Views.Public.class)
     public Long getId() {
         return id;
+    }
+
+    @JsonView(Views.Public.class)
+    public Long getUserId() {
+        return userId;
     }
 
     @JsonView(Views.Public.class)

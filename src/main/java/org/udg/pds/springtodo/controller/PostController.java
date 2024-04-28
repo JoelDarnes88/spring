@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.udg.pds.springtodo.DTO.PostDTO;
+import org.udg.pds.springtodo.DTO.PostBasicDTO;
 import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.service.PostService;
 
@@ -20,7 +20,6 @@ public class PostController extends BaseController {
 
     @Autowired
     PostService postService;
-
 
 
 
@@ -77,8 +76,8 @@ public class PostController extends BaseController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PostDTO>> searchPosts(@RequestParam String query) {
-        List<PostDTO> posts = postService.searchByTitol(query);
+    public ResponseEntity<List<PostBasicDTO>> searchPosts(@RequestParam String query) {
+        List<PostBasicDTO> posts = postService.searchByTitol(query);
         return ResponseEntity.ok(posts);
     }
 
