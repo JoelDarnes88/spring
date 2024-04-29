@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.udg.pds.springtodo.DTO.PostDTO;
 import org.udg.pds.springtodo.configuration.exceptions.ServiceException;
 import org.udg.pds.springtodo.entity.*;
+import org.udg.pds.springtodo.repository.PostImageRepository;
 import org.udg.pds.springtodo.repository.PostRepository;
 
 import java.util.Collection;
@@ -22,6 +23,8 @@ public class PostService {
     @Autowired
     private  UserService userService;
 
+    @Autowired
+    PostImageRepository postImageRepository;
 
     public Post getPost(Long id) {
         Optional<Post> uo = postRepository.findById(id);
@@ -88,4 +91,13 @@ public class PostService {
         return posts.stream().map(PostDTO::fromEntity).collect(Collectors.toList());
     }
 
+    public List<PostImage> addDefaultImages(List<PostImage> images) {
+        return postImageRepository.saveAll(images);
+    }
+
+    public Boolean deleteImage(String image) {
+        List<PostImage> images = postImageRepository.findAllByUrl(image);
+        postImageRepository.deleteAll(images);
+        return true;
+    }
 }

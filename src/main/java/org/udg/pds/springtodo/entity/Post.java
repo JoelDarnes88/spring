@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity(name = "posts")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -35,7 +38,8 @@ public class Post implements Serializable {
     @ManyToOne
     private User creador;
 
-
+    @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<PostImage> images;
 
 
     public Post() {
@@ -74,4 +78,17 @@ public class Post implements Serializable {
     @JsonView(Views.Public.class)
     public String getDescripcio() {return descripcio;}
 
+    @JsonView(Views.Public.class)
+    public List<String> getImages() {
+        List<String> image_list = new ArrayList();
+        if(images != null)
+            for(PostImage image : images) {
+                image_list.add(image.getUrl());
+            }
+        return image_list;
+    }
+
+    public void setImages(Collection<PostImage> images) {
+        this.images = images;
+    }
 }
