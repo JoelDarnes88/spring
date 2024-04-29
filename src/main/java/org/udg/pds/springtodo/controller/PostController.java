@@ -14,8 +14,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.udg.pds.springtodo.DTO.PostBasicDTO;
 import org.springframework.web.multipart.MultipartFile;
-import org.udg.pds.springtodo.DTO.PostDTO;
 import org.udg.pds.springtodo.configuration.exceptions.ControllerException;
 import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.repository.PostImageRepository;
@@ -95,8 +95,8 @@ public class PostController extends BaseController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PostDTO>> searchPosts(@RequestParam String query) {
-        List<PostDTO> posts = postService.searchByTitol(query);
+    public ResponseEntity<List<PostBasicDTO>> searchPosts(@RequestParam String query) {
+        List<PostBasicDTO> posts = postService.searchByTitol(query);
         return ResponseEntity.ok(posts);
     }
 

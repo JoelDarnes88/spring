@@ -83,10 +83,12 @@ TOTAL: 20h
 #### [P244-176 Com UR vull poder cercar posts](https://pds24-4c.youtrack.cloud/issue/P244-176/Com-UR-vull-poder-cercar-posts)
 * [P244-181 Spring crear endpoint /posts/search?query="titol"](https://pds24-4c.youtrack.cloud/issue/P244-181/Spring-crear-endpoint-posts-searchquerytitol) 3h
 * [P244-177 Afegir barra de cerca i funcionalitat de cercar](https://pds24-4c.youtrack.cloud/issue/P244-177/Afegir-barra-de-cerca-i-funcionalitat-de-cercar) 2h
+* [P244-190 Millores estetiques Android](https://pds24-4c.youtrack.cloud/issue/P244-190/Millores-estetiques-Android) 2h
+* [P244-191 Spring DTO basic de post](https://pds24-4c.youtrack.cloud/issue/P244-191/Spring-DTO-basic-de-post) 1h
 
 
 #### [P244-180 Com UR vull poder afegir imatges en posts](https://pds24-4c.youtrack.cloud/issue/P244-180/Com-UR-vull-poder-afegir-imatges-en-posts)
 * [P244-178 Afegir imatges en posts](https://pds24-4c.youtrack.cloud/issue/P244-178/Afegir-imatges-en-posts) Xh
 * [P244-179 Modificar imatges dels meus posts](https://pds24-4c.youtrack.cloud/issue/P244-179/Modificar-imatges-dels-meus-posts) Xh
 
-TOTAL: 5h + X
+TOTAL: 8h + X

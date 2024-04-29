@@ -2,15 +2,15 @@ package org.udg.pds.springtodo.DTO;
 
 import org.udg.pds.springtodo.entity.Post;
 
-public class PostDTO {
+public class PostBasicDTO {
     private Long id;
     private String titol;
     private String descripcio;
     private Double preu;
 
 
-    public static PostDTO fromEntity(Post post) {
-        PostDTO dto = new PostDTO();
+    public static PostBasicDTO fromEntity(Post post) {
+        PostBasicDTO dto = new PostBasicDTO();
         dto.setId(post.getId());
         dto.setTitol(post.getTitol());
         dto.setDescripcio(post.getDescripcio());
