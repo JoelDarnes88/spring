@@ -63,6 +63,13 @@ public class UserService {
         return nu;
     }
 
+    public List<User> searchUser(String query) {
+        List<User> users;
+        if (query.startsWith("@")) users = userRepository.findSimilarUsername(query.substring(1));
+        else users = userRepository.findSimilarName(query);
+        return users;
+    }
+
     public User getUser(Long id) {
         Optional<User> uo = userRepository.findById(id);
         if (uo.isPresent())

@@ -13,6 +13,7 @@ import org.udg.pds.springtodo.entity.Views;
 import org.udg.pds.springtodo.service.UserService;
 
 import java.util.Collection;
+import java.util.List;
 
 // This class is used to process all the authentication related URLs
 @RequestMapping(path="/users")
@@ -40,6 +41,15 @@ public class UserController extends BaseController {
 
     session.removeAttribute("simpleapp_auth_id");
     return BaseController.OK_MESSAGE;
+  }
+
+  @GetMapping("/search")
+  @JsonView(Views.Public.class)
+  public List<User> searchUser(HttpSession session, @RequestParam("query") String query) {
+
+      getLoggedUser(session);
+
+      return userService.searchUser(query);
   }
 
   @GetMapping(path="/{id}")
