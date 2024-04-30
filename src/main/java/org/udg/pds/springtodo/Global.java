@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import org.udg.pds.springtodo.entity.IdObject;
-import org.udg.pds.springtodo.entity.Post;
-import org.udg.pds.springtodo.entity.Tag;
-import org.udg.pds.springtodo.entity.User;
+import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.service.PostService;
 import org.udg.pds.springtodo.service.TagService;
 import org.udg.pds.springtodo.service.TaskService;
@@ -21,6 +18,7 @@ import org.udg.pds.springtodo.service.UserService;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -101,7 +99,7 @@ public class Global {
             logger.info("Starting populating database ...");
 
             User user = userService.register("usuari", "Carles M.", "United Kingdom", "usuari@hotmail.com", "+44 123456789", "123456");
-            userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
+            User user2 = userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
             IdObject taskId = taskService.addTask("Una tasca", user.getId(), AppDateFormatter.format(ZonedDateTime.now()), AppDateFormatter.format(ZonedDateTime.now()));
             Tag tag = tagService.addTag("ATag", "Just a tag");
             taskService.addTagsToTask(user.getId(), taskId.getId(), new ArrayList<Long>() {{
@@ -110,11 +108,26 @@ public class Global {
 
             //POSTS
             postService.addPost(user.getId(),"titol", "descripcio", 25.5);
-            Collection<Post> p = userService.getOwnedPosts(user.getId());
             postService.addPost(user.getId(),"titol2", "descripcio2", 24.5);
+            Collection<Post> p = userService.getOwnedPosts(user.getId());
+            this.addProductsImages(p);
+
+            postService.addPost(user2.getId(),"pintor", "pinta", 30.0);
+            postService.addPost(user2.getId(),"mecanic", "taller", 50.0);
+            Collection<Post> p2 = userService.getOwnedPosts(user2.getId());
+            this.addProductsImages(p2);
         }
     }
     public String getBaseURL() {
         return BASE_URL;
+    }
+
+    private void addProductsImages(Collection<Post> posts) {
+        for(Post p : posts) {
+            PostImage img1 = new PostImage(p.getId(), "https://www.lavanguardia.com/files/article_gallery_microformat/uploads/2021/11/18/619598168d903.jpeg");
+            PostImage img2 = new PostImage(p.getId(), "https://img.ccma.cat/multimedia/jpg/1/5/1666445920451_670x378.jpg");
+            PostImage img3 = new PostImage(p.getId(), "https://wpdirecto.com/wp-content/uploads/2017/08/alt-de-una-imagen.png");
+            postService.addDefaultImages(Arrays.asList(img1, img2, img3));
+        }
     }
 }

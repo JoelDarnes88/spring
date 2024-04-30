@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "users")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"}))
 public class User implements Serializable {
     /**
@@ -186,4 +186,6 @@ public class User implements Serializable {
         posts.size();
         return posts;
     }
+
+
 }

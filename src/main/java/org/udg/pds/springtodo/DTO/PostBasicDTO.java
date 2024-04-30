@@ -1,20 +1,27 @@
 package org.udg.pds.springtodo.DTO;
 
 import org.udg.pds.springtodo.entity.Post;
+import org.udg.pds.springtodo.entity.PostImage;
 
-public class PostDTO {
+import java.util.Collection;
+import java.util.List;
+
+public class PostBasicDTO {
     private Long id;
     private String titol;
     private String descripcio;
     private Double preu;
+    private List<String> images;
 
 
-    public static PostDTO fromEntity(Post post) {
-        PostDTO dto = new PostDTO();
+
+    public static PostBasicDTO fromEntity(Post post) {
+        PostBasicDTO dto = new PostBasicDTO();
         dto.setId(post.getId());
         dto.setTitol(post.getTitol());
         dto.setDescripcio(post.getDescripcio());
         dto.setPreu(post.getPreu());
+        dto.setImages(post.getImages());
         return dto;
     }
 
@@ -50,4 +57,8 @@ public class PostDTO {
     public void setPreu(Double preu) {
         this.preu = preu;
     }
+
+    public List<String> getImages() { return images; }
+
+    public void setImages(List<String> images) { this.images = images; }
 }

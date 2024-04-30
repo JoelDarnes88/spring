@@ -6,9 +6,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity(name = "posts")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Post implements Serializable {
     /**
      * Default value included to remove warning. Remove or modify at will. *
@@ -31,11 +34,15 @@ public class Post implements Serializable {
     @NotNull
     private String descripcio;
 
+    @NotNull
+    private Long userId;
+
     @JsonIgnore
     @ManyToOne
     private User creador;
 
-
+    @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Collection<PostImage> images;
 
 
     public Post() {
@@ -46,13 +53,18 @@ public class Post implements Serializable {
         this.descripcio = descripcio;
         this.preu = preu;
         this.creador = creador;
+        this.userId = creador.getId();
     }
-
 
 
     @JsonView(Views.Public.class)
     public Long getId() {
         return id;
+    }
+
+    @JsonView(Views.Public.class)
+    public Long getUserId() {
+        return userId;
     }
 
     @JsonView(Views.Public.class)
@@ -74,4 +86,17 @@ public class Post implements Serializable {
     @JsonView(Views.Public.class)
     public String getDescripcio() {return descripcio;}
 
+    @JsonView(Views.Public.class)
+    public List<String> getImages() {
+        List<String> image_list = new ArrayList();
+        if(images != null)
+            for(PostImage image : images) {
+                image_list.add(image.getUrl());
+            }
+        return image_list;
+    }
+
+    public void setImages(Collection<PostImage> images) {
+        this.images = images;
+    }
 }
