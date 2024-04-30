@@ -99,7 +99,7 @@ public class Global {
             logger.info("Starting populating database ...");
 
             User user = userService.register("usuari", "Carles M.", "United Kingdom", "usuari@hotmail.com", "+44 123456789", "123456");
-            userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
+            User user2 = userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
             IdObject taskId = taskService.addTask("Una tasca", user.getId(), AppDateFormatter.format(ZonedDateTime.now()), AppDateFormatter.format(ZonedDateTime.now()));
             Tag tag = tagService.addTag("ATag", "Just a tag");
             taskService.addTagsToTask(user.getId(), taskId.getId(), new ArrayList<Long>() {{
@@ -110,8 +110,12 @@ public class Global {
             postService.addPost(user.getId(),"titol", "descripcio", 25.5);
             postService.addPost(user.getId(),"titol2", "descripcio2", 24.5);
             Collection<Post> p = userService.getOwnedPosts(user.getId());
-
             this.addProductsImages(p);
+
+            postService.addPost(user2.getId(),"pintor", "pinta", 30.0);
+            postService.addPost(user2.getId(),"mecanic", "taller", 50.0);
+            Collection<Post> p2 = userService.getOwnedPosts(user2.getId());
+            this.addProductsImages(p2);
         }
     }
     public String getBaseURL() {

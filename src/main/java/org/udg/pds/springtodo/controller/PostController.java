@@ -25,6 +25,7 @@ import org.udg.pds.springtodo.Global;
 
 import java.io.InputStream;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -72,6 +73,42 @@ public class PostController extends BaseController {
         return new ResponseEntity<>(post.getId(), HttpStatus.OK);
     }
 
+    @PostMapping(path="/postImage", consumes = "multipart/form-data")
+    public ResponseEntity<Long> addPostImage(HttpSession session,
+                                             @RequestParam("titol") String titol,
+                                             @RequestParam("descripcio") String descripcio,
+                                             @RequestParam("preu") Double preu,
+                                             @RequestParam("files") List<MultipartFile> files) {
+        Long id = getLoggedUser(session);
+        Post post = postService.addPost(id, titol, descripcio, preu);
+
+        MinioClient minioClient = global.getMinioClient();
+        if (minioClient == null)
+            throw new ControllerException("Minio client not configured");
+        try {
+            for(MultipartFile file : files) {
+                InputStream istream = file.getInputStream();
+                String contentType = file.getContentType();
+                UUID imgName = UUID.randomUUID();
+                String objectName = imgName + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+
+                minioClient.putObject(
+                    PutObjectArgs.builder()
+                        .bucket(global.getMinioBucket())
+                        .object(objectName)
+                        .stream(istream, -1, 10485760)
+                        .build());
+
+                PostImage postImg = new PostImage(post.getId(), "http://localhost:8080/posts/image/" + objectName);
+                postImageRepository.save(postImg);
+            }
+        }
+        catch (Exception e) {
+            throw new ControllerException("Error saving file: " + e.getMessage());
+        }
+        return new ResponseEntity<>(post.getId(), HttpStatus.OK);
+    }
+
     @DeleteMapping(path="/{id}")
     public String deletePost(HttpSession session, @PathVariable("id") Long postId){
         Long loggedUserId = getLoggedUser(session);
@@ -100,42 +137,7 @@ public class PostController extends BaseController {
         return ResponseEntity.ok(posts);
     }
 
-    @PostMapping(path = "/image")
-    @JsonView(Views.Public.class)
-    public Boolean deletePostImage(HttpSession session, @RequestBody List<String> image) {
-        Long loggedUserId = getLoggedUser(session);
-        return postService.deleteImage(image.get(0));
-    }
 
-    @PostMapping(path = "/{post_id}/images")
-    public String upload(HttpSession session, @PathVariable("post_id") Long post_id, @RequestParam("file") List<MultipartFile> files) {
-
-        MinioClient minioClient = global.getMinioClient();
-        if (minioClient == null)
-            throw new ControllerException("Minio client not configured");
-
-        try {
-            for(MultipartFile file : files) {
-                InputStream istream = file.getInputStream();
-                String contentType = file.getContentType();
-                UUID imgName = UUID.randomUUID();
-                String objectName = imgName + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-
-                minioClient.putObject(
-                    PutObjectArgs.builder()
-                        .bucket(global.getMinioBucket())
-                        .object(objectName)
-                        .stream(istream, -1, 10485760)
-                        .build());
-
-                PostImage postImg = new PostImage(post_id, "http://localhost:8080/posts/image/" + objectName);
-                postImageRepository.save(postImg);
-            }
-            return "";
-        } catch (Exception e) {
-            throw new ControllerException("Error saving file: " + e.getMessage());
-        }
-    }
 
     @GetMapping("/image/{filename:.+}")
     public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) {
