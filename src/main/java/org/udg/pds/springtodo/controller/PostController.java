@@ -11,6 +11,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -65,12 +66,11 @@ public class PostController extends BaseController {
 
 
     @PostMapping(path="/post", consumes = "application/json")
-    public String addPost(HttpSession session, @Valid @RequestBody PostRequest postRequest) {
+    public ResponseEntity<Long> addPost(HttpSession session, @Valid @RequestBody PostRequest postRequest) {
         Long id = getLoggedUser(session);
-        postService.addPost(id, postRequest.titol, postRequest.descripcio, postRequest.preu);
-        return BaseController.OK_MESSAGE;
+        Post post = postService.addPost(id, postRequest.titol, postRequest.descripcio, postRequest.preu);
+        return new ResponseEntity<>(post.getId(), HttpStatus.OK);
     }
-
 
     @DeleteMapping(path="/{id}")
     public String deletePost(HttpSession session, @PathVariable("id") Long postId){
@@ -108,7 +108,7 @@ public class PostController extends BaseController {
     }
 
     @PostMapping(path = "/{post_id}/images")
-    public String upload(HttpSession session, @PathVariable("post_id") Long product_id, @RequestParam("file") List<MultipartFile> files) {
+    public String upload(HttpSession session, @PathVariable("post_id") Long post_id, @RequestParam("file") List<MultipartFile> files) {
 
         MinioClient minioClient = global.getMinioClient();
         if (minioClient == null)
@@ -128,8 +128,8 @@ public class PostController extends BaseController {
                         .stream(istream, -1, 10485760)
                         .build());
 
-                PostImage productImage = new PostImage(product_id, "http://localhost:8080/posts/image/" + objectName);
-                postImageRepository.save(productImage);
+                PostImage postImg = new PostImage(post_id, "http://localhost:8080/posts/image/" + objectName);
+                postImageRepository.save(postImg);
             }
             return "";
         } catch (Exception e) {

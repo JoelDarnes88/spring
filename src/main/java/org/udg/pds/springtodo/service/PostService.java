@@ -35,11 +35,12 @@ public class PostService {
     }
 
     @Transactional
-    public void addPost(Long userId, String titol, String descripcio, Double preu) {
+    public Post addPost(Long userId, String titol, String descripcio, Double preu) {
         User user = userService.getUser(userId);
         Post post = new Post(titol,descripcio,preu, user);
         user.addPost(post);
         postRepository.save(post);
+        return post;
     }
 
     public List<Post> getPosts(){
