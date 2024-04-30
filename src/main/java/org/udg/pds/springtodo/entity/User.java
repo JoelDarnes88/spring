@@ -106,18 +106,19 @@ public class User implements Serializable {
         return phone_number;
     }
 
-    @JsonView(Views.Private.class)
-    public double getWallet() {
-        return wallet;
-    }
-
     @JsonIgnore
     public String getPassword() {
         return password;
     }
-    @JsonIgnore
+
+    @JsonView(Views.Public.class)
     public String getAbout_me() {
         return about_me;
+    }
+
+    @JsonView(Views.Private.class)
+    public double getWallet() {
+        return wallet;
     }
 
     @JsonView(Views.Complete.class)
