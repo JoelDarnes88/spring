@@ -86,9 +86,10 @@ TOTAL: 20h
 
 
 #### [P244-180 Com UR vull poder afegir imatges en posts](https://pds24-4c.youtrack.cloud/issue/P244-180/Com-UR-vull-poder-afegir-imatges-en-posts)
-* [P244-198 Android afegir imatges en posts i millores estetiques](https://pds24-4c.youtrack.cloud/issue/P244-198/Android-afegir-imatges-en-posts-i-millores-estetiques) 7h +
-* [P244-178 Spring gestio d'imatges i endpoint posts/postImage](https://pds24-4c.youtrack.cloud/issue/P244-178/Spring-gestio-dimatges-i-endpoint-posts-postImage) 11h +
+* [P244-198 Android afegir imatges en posts i millores estetiques](https://pds24-4c.youtrack.cloud/issue/P244-198/Android-afegir-imatges-en-posts-i-millores-estetiques) 7h
+* [P244-178 Spring gestio d'imatges i endpoint posts/postImage](https://pds24-4c.youtrack.cloud/issue/P244-178/Spring-gestio-dimatges-i-endpoint-posts-postImage) 11h
 
-* [P244-179 Modificar imatges dels meus posts](https://pds24-4c.youtrack.cloud/issue/P244-179/Modificar-imatges-dels-meus-posts) Xh
+* [P244-179 Android modificar imatges dels meus posts](https://pds24-4c.youtrack.cloud/issue/P244-179/Android-modificar-imatges-dels-meus-posts) 10h
+* [P244-207 Spring endpoint actualizar els posts amb imatges](https://pds24-4c.youtrack.cloud/issue/P244-207/Spring-endpoint-actualizar-els-posts-amb-imatges) 3h
 
-TOTAL: 23h + X
+TOTAL:  36h

@@ -73,6 +73,50 @@ public class PostController extends BaseController {
         return new ResponseEntity<>(post.getId(), HttpStatus.OK);
     }
 
+    @PutMapping("/updatePostImage/{postId}")
+    public ResponseEntity<?> updatePostImage(HttpSession session,
+                                             @PathVariable Long postId,
+                                             @RequestParam("titol") String titol,
+                                             @RequestParam("descripcio") String descripcio,
+                                             @RequestParam("preu") Double preu,
+                                             @RequestParam(required = false) List<String> urlsToDel,
+                                             @RequestParam(required = false) List<MultipartFile> files) throws Exception {
+
+        Long id = getLoggedUser(session);
+        if(urlsToDel != null) postService.deleteImages(urlsToDel, postId);
+
+        Post post = postService.updatePost(id, postId, titol, descripcio, preu);
+
+        if(files != null){
+            MinioClient minioClient = global.getMinioClient();
+            if (minioClient == null)
+                throw new ControllerException("Minio client not configured");
+            try {
+                for (MultipartFile file : files) {
+                    InputStream istream = file.getInputStream();
+                    String contentType = file.getContentType();
+                    UUID imgName = UUID.randomUUID();
+                    String objectName = imgName + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+
+                    minioClient.putObject(
+                        PutObjectArgs.builder()
+                            .bucket(global.getMinioBucket())
+                            .object(objectName)
+                            .stream(istream, -1, 10485760)
+                            .build());
+
+                    PostImage postImg = new PostImage(post.getId(), "http://localhost:8080/posts/image/" + objectName);
+                    postImageRepository.save(postImg);
+                }
+            }
+            catch (Exception e) {
+                throw new ControllerException("Error saving file: " + e.getMessage());
+            }
+        }
+        return new ResponseEntity<>(post.getId(), HttpStatus.OK);
+    }
+
+
     @PostMapping(path="/postImage", consumes = "multipart/form-data")
     public ResponseEntity<Long> addPostImage(HttpSession session,
                                              @RequestParam("titol") String titol,
