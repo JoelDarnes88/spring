@@ -84,6 +84,13 @@ public class UserController extends BaseController {
 
   }
 
+  @PostMapping(path="/forgotPassword", consumes = "application/json")
+  public String forgotPassword(HttpSession session, @Valid @RequestBody String email) {
+      checkNotLoggedIn(session);
+      userService.forgotPassword(email);
+      return BaseController.OK_MESSAGE;
+  }
+
   @PostMapping(path="/modify", consumes = "application/json")
   public String modify(HttpSession session, @Valid  @RequestBody ModifyUser ru) {
       Long userId = getLoggedUser(session);
