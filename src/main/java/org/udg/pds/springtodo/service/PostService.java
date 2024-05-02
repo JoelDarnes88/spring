@@ -72,21 +72,14 @@ public class PostService {
     @Transactional
     public void deletePost(Long postId, Long userId) {
         if (getPost(postId).getUser().getId() == userId) {
-            String url = getPost(postId).getImages().get(0);
-            if(url != null) {
-                List<PostImage> a = postImageRepository.findAllByUrl(url);
-                for(PostImage p : a){
-                    Long imgId = p.getId();
-                    postImageRepository.deleteById(imgId);
-                }
-            }
+            List<String> imgListDelete = postRepository.findById(postId).get().getImages();
+            deleteImages(imgListDelete, postId);
             postRepository.deleteById(postId);
-
         } else throw new ServiceException("No es pot eliminar el post");
     }
 
     @Transactional
-    public void updatePost(Long userId, Long postId, String titol, String descripcio, Double preu) throws Exception {
+    public Post updatePost(Long userId, Long postId, String titol, String descripcio, Double preu) throws Exception {
         Post post = postRepository.findById(postId)
             .orElseThrow(() -> new Exception("Post not found"));
         if (!post.getUser().getId().equals(userId)) {
@@ -96,6 +89,7 @@ public class PostService {
         post.setDescripcio(descripcio);
         post.setPreu(preu);
         postRepository.save(post);
+        return post;
     }
 
 
@@ -115,4 +109,16 @@ public class PostService {
         return true;
     }
 
+    public void deleteImages(List<String> urlsToDel, Long postId) {
+        for(String url : urlsToDel){
+            String cleanedUrl = url.replace("\"", ""); //netejar urls amb doble cometes x2
+            List<PostImage> lImg = postImageRepository.findAllByUrl(cleanedUrl);
+            for(PostImage img : lImg){
+                Long imgId = img.getId();
+                if(img.getPostId() == postId){
+                    postImageRepository.deleteById(imgId);
+                }
+            }
+        }
+    }
 }

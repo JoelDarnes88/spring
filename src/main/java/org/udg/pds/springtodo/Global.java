@@ -124,9 +124,9 @@ public class Global {
 
     private void addProductsImages(Collection<Post> posts) {
         for(Post p : posts) {
-            PostImage img1 = new PostImage(p.getId(), "https://www.lavanguardia.com/files/article_gallery_microformat/uploads/2021/11/18/619598168d903.jpeg");
-            PostImage img2 = new PostImage(p.getId(), "https://img.ccma.cat/multimedia/jpg/1/5/1666445920451_670x378.jpg");
-            PostImage img3 = new PostImage(p.getId(), "https://wpdirecto.com/wp-content/uploads/2017/08/alt-de-una-imagen.png");
+            PostImage img1 = new PostImage(p.getId(), "http://localhost:8080/posts/image/1.jpg");
+            PostImage img2 = new PostImage(p.getId(), "http://localhost:8080/posts/image/2.jpg");
+            PostImage img3 = new PostImage(p.getId(), "http://localhost:8080/posts/image/3.jpg");
             postService.addDefaultImages(Arrays.asList(img1, img2, img3));
         }
     }

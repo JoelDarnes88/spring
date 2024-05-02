@@ -9,6 +9,5 @@ import java.util.List;
 
 @Component
 public interface PostImageRepository extends JpaRepository<PostImage, Long> {
-    PostImage findByUrl(String url);
     List<PostImage> findAllByUrl(String url);
 }
