@@ -86,7 +86,7 @@ public class UserService {
         String uuidAsString = uuid.toString();
         Token token = new Token(uuidAsString, uEmail.stream().findFirst().get().getId());
         tokenRepository.save(token);
-        message.setText("Entri en aquest enllaç per canviar la seva contrasenya: http://localhost:8080/forgotPasswordWeb?token=" + uuidAsString);
+        message.setText("Entri en aquest enllaç per canviar la seva contrasenya: http://localhost:8080/forgotPasswordWeb?token=" + uuidAsString + "\nSàpiga que té 10 min per fer el canvi, després aquest enllaç haurà expirat.");
         message.setSubject("Sol·licitut de canvi de contrasenya");
 
         mailSender.send(message);

@@ -45,4 +45,17 @@ public class Token {
     public void consumed() {
         this.consumption = new Date();
     }
+
+    @JsonView(Views.Private.class)
+    public boolean expired() {
+        long now = new Date().getTime();
+        long creationTime = creation.getTime();
+
+        // Calcular la diferencia en milisegundos
+        long diffInMillis = Math.abs(now - creationTime);
+
+        // Convertir la diferencia a minutos
+        long diffInMinutes = diffInMillis / (60 * 1000);
+        return consumption != null || diffInMinutes > 10;
+    }
 }
