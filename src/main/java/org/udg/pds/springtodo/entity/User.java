@@ -25,13 +25,14 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String name, String country, String email, String phone_number, String password) {
+    public User(String username, String name, String country, String email, String phone_number, String password, String payment_method) {
         this.username = username;
         this.name = name;
         this.country = country;
         this.email = email;
         this.phone_number = phone_number;
         this.password = password;
+        this.payment_method = payment_method;
         this.about_me = "";
         this.wallet = 0.0;
         this.tasks = new ArrayList<>();
@@ -61,6 +62,8 @@ public class User implements Serializable {
 
     @NotNull
     private String about_me;
+    @NotNull
+    private String payment_method;
 
     @NotNull
     private Double wallet;
@@ -110,6 +113,11 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+    @JsonIgnore
+    public String getPaymentMethod() {
+        return payment_method;
+    }
+
 
     @JsonView(Views.Public.class)
     public String getAbout_me() {
@@ -168,6 +176,10 @@ public class User implements Serializable {
     @JsonView(Views.Private.class)
     public void setAboutMe(String about_me) {
         this.about_me = about_me;
+    }
+    @JsonView(Views.Private.class)
+    public void setPaymentMethod(String payment_method) {
+        this.payment_method = payment_method;
     }
 
     @JsonView(Views.Private.class)
