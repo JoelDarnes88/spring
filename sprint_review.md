@@ -81,6 +81,33 @@ TOTAL: 71
 
 # Sprint 3
 
+## Massallé Richart Joan
+#### [P244-43 Com usuari no registrat, vull poder fer sign in](https://pds24-4c.youtrack.cloud/issue/P244-43/Com-usuari-no-registrat-vull-poder-fer-sign-in)
+* [P244-119 Crear la logística del register](https://pds24-4c.youtrack.cloud/issue/P244-119/Crear-la-logistica-del-register) 3h
+
+#### [P244-97 Com a UR, vull poder canviar les dades personals de settings](https://pds24-4c.youtrack.cloud/issue/P244-97/Com-a-UR-vull-poder-canviar-les-dades-personals-de-settings)
+* [P244-161 Desenvolupar SettingsFragment](https://pds24-4c.youtrack.cloud/issue/P244-161/Desenvolupar-SettingsFragment) 5h
+* [P244-162 Desenvolupar els endopoints necessaris per cada canvi](https://pds24-4c.youtrack.cloud/issue/P244-162/Desenvolupar-els-endopoints-necessaris-per-cada-canvi) 5h
+* [P244-163 Testejar el codi i debuggar el que sigui necessari](https://pds24-4c.youtrack.cloud/issue/P244-163/Testejar-el-codi-i-debuggar-el-que-sigui-necessari) 3h
+
+#### [P244-98 Com UR però no loguejat, puc modificar la contrasenya amb el correu associat](https://pds24-4c.youtrack.cloud/issue/P244-98/Com-UR-pero-no-loguejat-puc-modificar-la-contrasenya-amb-el-correu-associat)
+* [P244-165 Generar el fragment i els elements .xml necessaris](https://pds24-4c.youtrack.cloud/issue/P244-165/Generar-el-fragment-i-els-elements-.xml-necessaris) 5h
+* [P244-166 Generar l'endpoint POST per sol·licitar el canvi de contrasenya](https://pds24-4c.youtrack.cloud/issue/P244-166/Generar-lendpoint-POST-per-sollicitar-el-canvi-de-contrasenya) 5h
+* [P244-208 Poder enviar correus](https://pds24-4c.youtrack.cloud/issue/P244-208/Poder-enviar-correus) 7h
+* [P244-167 Creació de les pàgines web pel canvi de contrasenya](https://pds24-4c.youtrack.cloud/issue/P244-167/Creacio-de-les-pagines-web-pel-canvi-de-contrasenya) 10h
+* [P244-169 Executar els canvis rebuts de la pàgina web](https://pds24-4c.youtrack.cloud/issue/P244-169/Executar-els-canvis-rebuts-de-la-pagina-web) 10h
+
+#### [P244-99 Com a UR, vull poder modificar els meus mètodes de pagaments des de settings](https://pds24-4c.youtrack.cloud/issue/P244-99/Com-a-UR-vull-poder-modificar-els-meus-metodes-de-pagaments-des-de-settings)
+* [P244-172 Fer les modificacions de les dades de l'usuari des de Android](https://pds24-4c.youtrack.cloud/issue/P244-172/Fer-les-modificacions-de-les-dades-de-lusuari-des-de-Android) 7h
+* [P244-173 Afegir mètode de pagament al POST "users/modify"](https://pds24-4c.youtrack.cloud/issue/P244-173/Afegir-metode-de-pagament-al-POST-users-modify) 7h
+* [P244-213 Afegir un GET al servidor per saber quin mètode de pagament s'usa](https://pds24-4c.youtrack.cloud/issue/P244-213/Afegir-un-GET-al-servidor-per-saber-quin-metode-de-pagament-susa) 3h
+
+#### [P244-100 Com a UR, vull poder eliminar el compte des de settings](https://pds24-4c.youtrack.cloud/issue/P244-100/Com-a-UR-vull-poder-eliminar-el-compte-des-de-settings)
+* [P244-174 Afegir el botó de borrar Compta a Settings (Android)](https://pds24-4c.youtrack.cloud/issue/P244-174/Afegir-el-boto-de-borrar-Compta-a-Settings-Android) 3h
+
+#### [P244-192 Millorar interfice gràfica](https://pds24-4c.youtrack.cloud/issue/P244-192/Millorar-interfice-grafica)
+* [P244-210 Icona de l'aplicació](https://pds24-4c.youtrack.cloud/issue/P244-210/Icona-de-laplicacio) 0.5h
+
 ## Arman Oleksandr
 #### [P244-176 Com UR vull poder cercar posts](https://pds24-4c.youtrack.cloud/issue/P244-176/Com-UR-vull-poder-cercar-posts)
 * [P244-181 Spring crear endpoint /posts/search?query="titol"](https://pds24-4c.youtrack.cloud/issue/P244-181/Spring-crear-endpoint-posts-searchquerytitol) 13
