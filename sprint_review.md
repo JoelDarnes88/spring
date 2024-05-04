@@ -50,46 +50,48 @@ Total: 21h
 
 ## Arman Oleksandr
 #### [P244-60 Com UR vull poder crear posts](https://pds24-4c.youtrack.cloud/issue/P244-60/Com-UR-vull-poder-crear-posts)
-* [P244-81 Spring crear elements de Post i endpoints](https://pds24-4c.youtrack.cloud/issue/P244-81/Spring-crear-elements-de-Post-i-endpoints) 13h
-* [P244-110 Android bottom nav i fragment amb interficie per crear posts](https://pds24-4c.youtrack.cloud/issue/P244-110/Android-bottom-nav-i-fragment-amb-interficie-per-crear-posts) 9h
+* [P244-81 Spring crear elements de Post i endpoints](https://pds24-4c.youtrack.cloud/issue/P244-81/Spring-crear-elements-de-Post-i-endpoints) 34
+* [P244-110 Android bottom nav i fragment amb interficie per crear posts](https://pds24-4c.youtrack.cloud/issue/P244-110/Android-bottom-nav-i-fragment-amb-interficie-per-crear-posts) 21
 
 #### [P244-44 Com a UR, poder veure els posts](https://pds24-4c.youtrack.cloud/issue/P244-60/Com-UR-vull-poder-crear-posts)
-* [P244-113 Mostrar els posts amb RecyclerView GET /posts](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-113) 11h
-* [P244-115 Afegir pull to refresh per actualitzar els posts](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-115) 3h
-* [P244-121 Obrir un post i vista en detall](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-121) 7h
+* [P244-113 Mostrar els posts amb RecyclerView GET /posts](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-113) 21
+* [P244-115 Afegir pull to refresh per actualitzar els posts](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-115) 8
+* [P244-121 Obrir un post i vista en detall](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-121) 21
 
-TOTAL: 43h
+TOTAL: 105
+
 
 
 # Sprint 2
 
 ## Arman Oleksandr
 #### [P244-149 Com a UR vull veure els meus posts](https://pds24-4c.youtrack.cloud/issue/P244-149/Com-a-UR-vull-veure-els-meus-posts)
-* [P244-150 Des de perfil mostrar els meus posts](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-150) 5h
+* [P244-150 Des de perfil mostrar els meus posts](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-150) 21
 
 #### [P244-51 Com a UR, esborrar post](https://pds24-4c.youtrack.cloud/issue/P244-51/Com-a-UR-esborrar-post)
-* [P244-151 Crear vista detall dels meus posts, botó i funcionalitat d'esborrar post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-151) 5h
+* [P244-151 Crear vista detall dels meus posts, botó i funcionalitat d'esborrar post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-151) 21
 
 #### [P244-148 Com a UR vull editar un dels meus post](https://pds24-4c.youtrack.cloud/issue/P244-148/Com-a-UR-vull-editar-un-dels-meus-post)
-* [P244-153 En vista detall dels meus posts, botó i funcionalitat per d'editar el contingut del post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-153) 8h
-* [P244-160 Spring crear endpoint PUT per editar posts](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-160) 2h
+* [P244-153 En vista detall dels meus posts, botó i funcionalitat per d'editar el contingut del post](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-153) 21
+* [P244-160 Spring crear endpoint PUT per editar posts](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-160) 8
 
-TOTAL: 20h
+TOTAL: 71
+
 
 
 # Sprint 3
 
 ## Arman Oleksandr
 #### [P244-176 Com UR vull poder cercar posts](https://pds24-4c.youtrack.cloud/issue/P244-176/Com-UR-vull-poder-cercar-posts)
-* [P244-181 Spring crear endpoint /posts/search?query="titol"](https://pds24-4c.youtrack.cloud/issue/P244-181/Spring-crear-endpoint-posts-searchquerytitol) 3h
-* [P244-177 Afegir barra de cerca i funcionalitat de cercar](https://pds24-4c.youtrack.cloud/issue/P244-177/Afegir-barra-de-cerca-i-funcionalitat-de-cercar) 2h
+* [P244-181 Spring crear endpoint /posts/search?query="titol"](https://pds24-4c.youtrack.cloud/issue/P244-181/Spring-crear-endpoint-posts-searchquerytitol) 13
+* [P244-177 Afegir barra de cerca i funcionalitat de cercar](https://pds24-4c.youtrack.cloud/issue/P244-177/Afegir-barra-de-cerca-i-funcionalitat-de-cercar) 8
 
 
 #### [P244-180 Com UR vull poder afegir imatges en posts](https://pds24-4c.youtrack.cloud/issue/P244-180/Com-UR-vull-poder-afegir-imatges-en-posts)
-* [P244-198 Android afegir imatges en posts i millores estetiques](https://pds24-4c.youtrack.cloud/issue/P244-198/Android-afegir-imatges-en-posts-i-millores-estetiques) 7h
-* [P244-178 Spring gestio d'imatges i endpoint posts/postImage](https://pds24-4c.youtrack.cloud/issue/P244-178/Spring-gestio-dimatges-i-endpoint-posts-postImage) 11h
+* [P244-198 Android afegir imatges en posts i millores estetiques](https://pds24-4c.youtrack.cloud/issue/P244-198/Android-afegir-imatges-en-posts-i-millores-estetiques) 34
+* [P244-178 Spring gestio d'imatges i endpoint posts/postImage](https://pds24-4c.youtrack.cloud/issue/P244-178/Spring-gestio-dimatges-i-endpoint-posts-postImage) 34
 
-* [P244-179 Android modificar imatges dels meus posts](https://pds24-4c.youtrack.cloud/issue/P244-179/Android-modificar-imatges-dels-meus-posts) 10h
-* [P244-207 Spring endpoint actualizar els posts amb imatges](https://pds24-4c.youtrack.cloud/issue/P244-207/Spring-endpoint-actualizar-els-posts-amb-imatges) 3h
+* [P244-179 Android modificar imatges dels meus posts](https://pds24-4c.youtrack.cloud/issue/P244-179/Android-modificar-imatges-dels-meus-posts) 34
+* [P244-207 Spring endpoint actualizar els posts amb imatges](https://pds24-4c.youtrack.cloud/issue/P244-207/Spring-endpoint-actualizar-els-posts-amb-imatges) 8
 
-TOTAL:  36h
+TOTAL:  131
