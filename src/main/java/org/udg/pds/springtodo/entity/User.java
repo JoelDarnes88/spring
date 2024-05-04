@@ -5,19 +5,38 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "users")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"}))
 public class User implements Serializable {
     /**
      * Default value included to remove warning. Remove or modify at will. *
      */
     private static final long serialVersionUID = 1L;
+
+    public User() {
+    }
+
+    public User(String username, String name, String country, String email, String phone_number, String password, String payment_method) {
+        this.username = username;
+        this.name = name;
+        this.country = country;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.password = password;
+        this.payment_method = payment_method;
+        this.about_me = "";
+        this.wallet = 0.0;
+        this.tasks = new ArrayList<>();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,34 +62,26 @@ public class User implements Serializable {
 
     @NotNull
     private String about_me;
-
     @NotNull
     private String payment_method;
 
     @NotNull
     private Double wallet;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Collection<Task> tasks;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "creador")
-    private List<Post> posts;
+    private Collection<Post> posts;
 
-    public User() {
-    }
-
-    public User(String username, String name, String country, String email, String phone_number, String password, String payment_method) {
-        this.username = username;
-        this.name = name;
-        this.country = country;
-        this.email = email;
-        this.phone_number = phone_number;
-        this.password = password;
-        this.payment_method = payment_method;
-        this.about_me = "";
-        this.wallet = 0.0;
-    }
-
-    @JsonView(Views.Public.class)
+    @JsonView(Views.Private.class)
     public Long getId() {
         return id;
+    }
+
+    @JsonView(Views.Private.class)
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @JsonView(Views.Public.class)
@@ -102,7 +113,6 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
-
     @JsonIgnore
     public String getPaymentMethod() {
         return payment_method;
@@ -119,9 +129,13 @@ public class User implements Serializable {
         return wallet;
     }
 
-    @JsonView(Views.Private.class)
-    public void setId(Long id) {
-        this.id = id;
+    @JsonView(Views.Complete.class)
+    public Collection<Task> getTasks() {
+        // Since tasks is collection controlled by JPA, it has LAZY loading by default. That means
+        // that you have to query the object (calling size(), for example) to get the list initialized
+        // More: http://www.javabeat.net/jpa-lazy-eager-loading/
+        tasks.size();
+        return tasks;
     }
 
     @JsonView(Views.Private.class)
@@ -163,17 +177,27 @@ public class User implements Serializable {
     public void setAboutMe(String about_me) {
         this.about_me = about_me;
     }
-
     @JsonView(Views.Private.class)
     public void setPaymentMethod(String payment_method) {
         this.payment_method = payment_method;
     }
 
+    @JsonView(Views.Private.class)
+    public void setTasks(Collection<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
     public void addPost(Post post) { posts.add(post); }
 
     @JsonView(Views.Complete.class)
-    public List<Post> getOwneddPosts() {
+    public Collection<Post> getOwneddPosts() {
         posts.size();
         return posts;
     }
+
+
 }
