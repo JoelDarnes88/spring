@@ -61,6 +61,7 @@ Total: 21h
 TOTAL: 105
 
 
+
 # Sprint 2
 
 ## Arman Oleksandr
@@ -77,6 +78,7 @@ TOTAL: 105
 TOTAL: 71
 
 
+
 # Sprint 3
 
 ## Arman Oleksandr
@@ -86,10 +88,10 @@ TOTAL: 71
 
 
 #### [P244-180 Com UR vull poder afegir imatges en posts](https://pds24-4c.youtrack.cloud/issue/P244-180/Com-UR-vull-poder-afegir-imatges-en-posts)
-* [P244-198 Android afegir imatges en posts i millores estetiques](https://pds24-4c.youtrack.cloud/issue/P244-198/Android-afegir-imatges-en-posts-i-millores-estetiques) 21
+* [P244-198 Android afegir imatges en posts i millores estetiques](https://pds24-4c.youtrack.cloud/issue/P244-198/Android-afegir-imatges-en-posts-i-millores-estetiques) 34
 * [P244-178 Spring gestio d'imatges i endpoint posts/postImage](https://pds24-4c.youtrack.cloud/issue/P244-178/Spring-gestio-dimatges-i-endpoint-posts-postImage) 34
 
 * [P244-179 Android modificar imatges dels meus posts](https://pds24-4c.youtrack.cloud/issue/P244-179/Android-modificar-imatges-dels-meus-posts) 34
 * [P244-207 Spring endpoint actualizar els posts amb imatges](https://pds24-4c.youtrack.cloud/issue/P244-207/Spring-endpoint-actualizar-els-posts-amb-imatges) 8
 
-TOTAL:  118
+TOTAL:  131
