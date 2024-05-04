@@ -9,4 +9,6 @@ import java.util.List;
 @Component
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByTitolContainingIgnoreCase(String titol);
+    
+    List<Post> findByTipusServeiNameContainingIgnoreCase(String name);
 }
