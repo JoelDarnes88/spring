@@ -55,7 +55,7 @@ public class UserService {
         if (uUsername.size() > 0)
             throw new ServiceException("Username already exists");
 
-        User nu = new User(username, name, country, email, phone_number, password);
+        User nu = new User(username, name, country, email, phone_number, password, "Visa");
         userRepository.save(nu);
         return nu;
     }
@@ -95,7 +95,12 @@ public class UserService {
         return null;
     }
 
-    public User modify(Long userId, String username, String name, String country, String email, String phone_number, String password, String aboutMe) {
+    public String getPaymentMethod(Long userId) {
+        User u = getUser(userId);
+        return u.getPaymentMethod();
+    }
+
+    public User modify(Long userId, String username, String name, String country, String email, String phone_number, String password, String aboutMe, String paymentMethod) {
         User nu = getUser(userId);
         if(!username.isBlank()) nu.setUsername(username);
         if(!name.isEmpty()) nu.setName(name);
@@ -104,6 +109,7 @@ public class UserService {
         if(!phone_number.isEmpty()) nu.setPhoneNumber(phone_number);
         if(!password.isEmpty()) nu.setPassword(password);
         if(!aboutMe.isEmpty()) nu.setAboutMe(aboutMe);
+        if(!paymentMethod.isEmpty()) nu.setPaymentMethod(paymentMethod);
         userRepository.save(nu);
         return nu;
     }

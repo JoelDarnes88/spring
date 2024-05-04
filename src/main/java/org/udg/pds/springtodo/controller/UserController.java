@@ -13,7 +13,9 @@ import org.udg.pds.springtodo.entity.Views;
 import org.udg.pds.springtodo.service.UserService;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // This class is used to process all the authentication related URLs
 @RequestMapping(path="/users")
@@ -91,10 +93,21 @@ public class UserController extends BaseController {
       return BaseController.OK_MESSAGE;
   }
 
-  @PostMapping(path="/modify", consumes = "application/json")
-  public String modify(HttpSession session, @Valid  @RequestBody ModifyUser ru) {
+  @GetMapping(path="/getPaymentMethod")
+  public Map<String, String> getPaymentMethod(HttpSession session) {
       Long userId = getLoggedUser(session);
-      userService.modify(userId, ru.username, ru.name, ru.country, ru.email, ru.phone_number, ru.password, ru.about_me);
+      String paymentMethod = userService.getPaymentMethod(userId);
+      // Crear un mapa para almacenar el resultado
+      Map<String, String> resultMap = new HashMap<>();
+      resultMap.put("paymentMethod", paymentMethod);
+
+      // Devolver el mapa como JSON en la respuesta
+      return resultMap;
+  }
+  @PostMapping(path="/modify", consumes = "application/json")
+  public String modify(HttpSession session, @Valid  @RequestBody ModifyUser mu) {
+      Long userId = getLoggedUser(session);
+      userService.modify(userId, mu.username, mu.name, mu.country, mu.email, mu.phone_number, mu.password, mu.about_me, mu.payment_method);
       return BaseController.OK_MESSAGE;
   }
 
@@ -152,6 +165,8 @@ public class UserController extends BaseController {
       public String password;
       @NotNull
       public String about_me;
+      @NotNull
+      public String payment_method;
   }
 
 }
