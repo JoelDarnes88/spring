@@ -2,12 +2,10 @@ package org.udg.pds.springtodo.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 import org.udg.pds.springtodo.configuration.exceptions.ServiceException;
 import org.udg.pds.springtodo.entity.Post;
-import org.udg.pds.springtodo.entity.Task;
 import org.udg.pds.springtodo.entity.Token;
 import org.udg.pds.springtodo.entity.User;
 import org.udg.pds.springtodo.repository.TokenRepository;
@@ -15,8 +13,6 @@ import org.udg.pds.springtodo.repository.UserRepository;
 
 import java.util.*;
 
-import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 @Service
@@ -25,10 +21,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private TokenRepository tokenRepository;
-
-    private JavaMailSender mailSender;
 
     public User matchPassword(String username, String password) {
 
@@ -116,8 +111,8 @@ public class UserService {
 
     public List<User> searchUser(String query) {
         List<User> users;
-        if (query.startsWith("@")) users = userRepository.findSimilarUsername(query.substring(1));
-        else users = userRepository.findSimilarName(query);
+        if (query.startsWith("@")) users = userRepository.findByUsernameContainingIgnoreCase(query.substring(1));
+        else users = userRepository.findByNameContainingIgnoreCase(query);
         return users;
     }
 
@@ -129,19 +124,12 @@ public class UserService {
             throw new ServiceException(String.format("User with id = % does not exists", id));
     }
 
-    public User getUserProfile(long id) {
-        User u = this.getUser(id);
-        for (Task t : u.getTasks())
-            t.getTags();
-        return u;
-    }
-
     public void deleteUser(Long userId) {
         User u = this.getUser(userId);
         userRepository.delete(u);
     }
 
-    public Collection<Post> getOwnedPosts (Long userId) {
+    public List<Post> getOwnedPosts (Long userId) {
         User u = this.getUser(userId);
         return u.getOwneddPosts();
     }
