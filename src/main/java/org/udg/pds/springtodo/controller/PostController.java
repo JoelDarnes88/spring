@@ -86,18 +86,18 @@ public class PostController extends BaseController {
     }
 
     @PostMapping(path="/postImage", consumes = "multipart/form-data")
-    public String addPostImage(HttpSession session,
+    public ResponseEntity<Long> addPostImage(HttpSession session,
                                              @RequestParam("titol") String titol,
                                              @RequestParam("descripcio") String descripcio,
                                              @RequestParam("preu") Double preu,
-                                             @RequestParam("nomServei") String nomServei/*,
-                                             @RequestParam("files") List<MultipartFile> files*/) {
+                                             @RequestParam("nomServei") String nomServei,
+                                             @RequestParam("files") List<MultipartFile> files) {
         Long id = getLoggedUser(session);
-        
-        Servei servei = serveiService.searchService(nomServei);
-        postService.addPost(id, titol, descripcio, preu, servei);
 
-        /*MinioClient minioClient = global.getMinioClient();
+        Servei servei = serveiService.searchService(nomServei);
+        Post post = postService.addPost(id, titol, descripcio, preu, servei);
+
+        MinioClient minioClient = global.getMinioClient();
         if (minioClient == null)
             throw new ControllerException("Minio client not configured");
         try {
@@ -121,27 +121,26 @@ public class PostController extends BaseController {
         catch (Exception e) {
             throw new ControllerException("Error saving file: " + e.getMessage());
         }
-        return new ResponseEntity<>(post.getId(), HttpStatus.OK);*/
-        return BaseController.OK_MESSAGE;
+        return new ResponseEntity<>(post.getId(), HttpStatus.OK);
     }
 
     @PutMapping("/updatePostImage/{postId}")
-    public String updatePostImage(HttpSession session,
+    public ResponseEntity<?> updatePostImage(HttpSession session,
                                              @PathVariable Long postId,
                                              @RequestParam("titol") String titol,
                                              @RequestParam("descripcio") String descripcio,
                                              @RequestParam("preu") Double preu,
                                              @RequestParam("nomServei") String nomServei,
-                                             @RequestParam(required = false) List<String> urlsToDel/*,
-                                             @RequestParam(required = false) List<MultipartFile> files*/) throws Exception {
+                                             @RequestParam(required = false) List<String> urlsToDel,
+                                             @RequestParam(required = false) List<MultipartFile> files) throws Exception {
 
         Long id = getLoggedUser(session);
         if(urlsToDel != null) postService.deleteImages(urlsToDel, postId);
 
         Servei servei = serveiService.searchService(nomServei);
-        postService.updatePost(id, postId, titol, descripcio, preu, servei);
+        Post post = postService.addPost(id, titol, descripcio, preu, servei);
 
-        /*if(files != null){
+        if(files != null){
             MinioClient minioClient = global.getMinioClient();
             if (minioClient == null)
                 throw new ControllerException("Minio client not configured");
@@ -167,8 +166,7 @@ public class PostController extends BaseController {
                 throw new ControllerException("Error saving file: " + e.getMessage());
             }
         }
-        return new ResponseEntity<>(post.getId(), HttpStatus.OK);*/
-        return BaseController.OK_MESSAGE;
+        return new ResponseEntity<>(post.getId(), HttpStatus.OK);
     }
 
     @DeleteMapping(path="/{id}")
