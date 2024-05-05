@@ -20,13 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.udg.pds.springtodo.configuration.exceptions.ControllerException;
 import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.repository.PostImageRepository;
-import org.udg.pds.springtodo.repository.ServeiRepository;
 import org.udg.pds.springtodo.service.PostService;
 import org.udg.pds.springtodo.Global;
-import org.udg.pds.springtodo.service.ServeiService;
 
 import java.io.InputStream;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,25 +38,24 @@ public class PostController extends BaseController {
     PostService postService;
 
     @Autowired
-    ServeiService serveiService;
-
-    @Autowired
     private PostImageRepository postImageRepository;
 
     @Autowired
     Global global;
 
-    @GetMapping(path="")
-    @JsonView(Views.Public.class)
-    public List<Post> getPosts(HttpSession session){
-        getLoggedUser(session);
-        return postService.getPosts();
-    }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<PostBasicDTO>> searchPosts(@RequestParam String query) {
-        List<PostBasicDTO> posts = postService.searchPosts(query);
-        return ResponseEntity.ok(posts);
+    @GetMapping(path="/me")
+    @JsonView(Views.Public.class)
+    public Collection<Post> getMeusPosts(HttpSession session){
+        Long id = getLoggedUser(session);
+        return postService.getPostsUser(id);
+    }
+    @GetMapping(path="/user/{userId}")
+    @JsonView(Views.Public.class)
+    public Collection<Post> getPostsUser(HttpSession session, @PathVariable("userId") String userIdstr){
+        getLoggedUser(session);
+        Long userId = Long.parseLong(userIdstr);
+        return postService.getPostsUser(userId);
     }
 
     @GetMapping(path="/{id}")
@@ -66,61 +65,11 @@ public class PostController extends BaseController {
         return postService.getPost(id);
     }
 
-    @GetMapping(path="/user/{userId}")
-    @JsonView(Views.Public.class)
-    public List<Post> getUserPosts(HttpSession session, @PathVariable("userId") String userIdstr){
-        getLoggedUser(session);
-        Long userId = Long.parseLong(userIdstr);
-        return postService.getUserPosts(userId);
-    }
 
-    @GetMapping(path="/user/{userId}/servei/{serviceId}")
-    @JsonView(Views.Public.class)
-    public List<Post> getUserServicePosts(HttpSession session, @PathVariable("userId") String userIdstr, @PathVariable("serviceId") String serviceIdstr){
-        getLoggedUser(session);
-        Long userId = Long.parseLong(userIdstr);
-        Long serviceId = Long.parseLong(serviceIdstr);
-        List<Post> posts = postService.getUserPosts(userId);
-        posts.removeIf(post -> !post.getServei().getId().equals(serviceId));
-        return posts;
-    }
-
-    @PostMapping(path="/postImage", consumes = "multipart/form-data")
-    public ResponseEntity<Long> addPostImage(HttpSession session,
-                                             @RequestParam("titol") String titol,
-                                             @RequestParam("descripcio") String descripcio,
-                                             @RequestParam("preu") Double preu,
-                                             @RequestParam("nomServei") String nomServei,
-                                             @RequestParam("files") List<MultipartFile> files) {
+    @PostMapping(path="/post", consumes = "application/json")
+    public ResponseEntity<Long> addPost(HttpSession session, @Valid @RequestBody PostRequest postRequest) {
         Long id = getLoggedUser(session);
-
-        Servei servei = serveiService.searchService(nomServei);
-        Post post = postService.addPost(id, titol, descripcio, preu, servei);
-
-        MinioClient minioClient = global.getMinioClient();
-        if (minioClient == null)
-            throw new ControllerException("Minio client not configured");
-        try {
-            for(MultipartFile file : files) {
-                InputStream istream = file.getInputStream();
-                String contentType = file.getContentType();
-                UUID imgName = UUID.randomUUID();
-                String objectName = imgName + "." + FilenameUtils.getExtension(file.getOriginalFilename());
-
-                minioClient.putObject(
-                    PutObjectArgs.builder()
-                        .bucket(global.getMinioBucket())
-                        .object(objectName)
-                        .stream(istream, -1, 10485760)
-                        .build());
-
-                PostImage postImg = new PostImage(post.getId(), "http://localhost:8080/posts/image/" + objectName);
-                postImageRepository.save(postImg);
-            }
-        }
-        catch (Exception e) {
-            throw new ControllerException("Error saving file: " + e.getMessage());
-        }
+        Post post = postService.addPost(id, postRequest.titol, postRequest.descripcio, postRequest.preu);
         return new ResponseEntity<>(post.getId(), HttpStatus.OK);
     }
 
@@ -130,15 +79,13 @@ public class PostController extends BaseController {
                                              @RequestParam("titol") String titol,
                                              @RequestParam("descripcio") String descripcio,
                                              @RequestParam("preu") Double preu,
-                                             @RequestParam("nomServei") String nomServei,
                                              @RequestParam(required = false) List<String> urlsToDel,
                                              @RequestParam(required = false) List<MultipartFile> files) throws Exception {
 
         Long id = getLoggedUser(session);
         if(urlsToDel != null) postService.deleteImages(urlsToDel, postId);
 
-        Servei servei = serveiService.searchService(nomServei);
-        Post post = postService.addPost(id, titol, descripcio, preu, servei);
+        Post post = postService.updatePost(id, postId, titol, descripcio, preu);
 
         if(files != null){
             MinioClient minioClient = global.getMinioClient();
@@ -169,12 +116,72 @@ public class PostController extends BaseController {
         return new ResponseEntity<>(post.getId(), HttpStatus.OK);
     }
 
+
+    @PostMapping(path="/postImage", consumes = "multipart/form-data")
+    public ResponseEntity<Long> addPostImage(HttpSession session,
+                                             @RequestParam("titol") String titol,
+                                             @RequestParam("descripcio") String descripcio,
+                                             @RequestParam("preu") Double preu,
+                                             @RequestParam("files") List<MultipartFile> files) {
+        Long id = getLoggedUser(session);
+        Post post = postService.addPost(id, titol, descripcio, preu);
+
+        MinioClient minioClient = global.getMinioClient();
+        if (minioClient == null)
+            throw new ControllerException("Minio client not configured");
+        try {
+            for(MultipartFile file : files) {
+                InputStream istream = file.getInputStream();
+                String contentType = file.getContentType();
+                UUID imgName = UUID.randomUUID();
+                String objectName = imgName + "." + FilenameUtils.getExtension(file.getOriginalFilename());
+
+                minioClient.putObject(
+                    PutObjectArgs.builder()
+                        .bucket(global.getMinioBucket())
+                        .object(objectName)
+                        .stream(istream, -1, 10485760)
+                        .build());
+
+                PostImage postImg = new PostImage(post.getId(), "http://localhost:8080/posts/image/" + objectName);
+                postImageRepository.save(postImg);
+            }
+        }
+        catch (Exception e) {
+            throw new ControllerException("Error saving file: " + e.getMessage());
+        }
+        return new ResponseEntity<>(post.getId(), HttpStatus.OK);
+    }
+
     @DeleteMapping(path="/{id}")
     public String deletePost(HttpSession session, @PathVariable("id") Long postId){
         Long loggedUserId = getLoggedUser(session);
         postService.deletePost(postId, loggedUserId);
         return BaseController.OK_MESSAGE;
     }
+
+
+    @GetMapping(path="")
+    @JsonView(Views.Public.class)
+    public List<Post> getPosts(HttpSession session){
+        getLoggedUser(session);
+        return postService.getPosts();
+    }
+
+    @PutMapping(path="/{id}", consumes = "application/json")
+    public String updatePost(HttpSession session,@PathVariable("id") Long postId, @Valid @RequestBody PostRequest postRequest) throws Exception {
+        Long id = getLoggedUser(session);
+        postService.updatePost(id, postId, postRequest.titol, postRequest.descripcio, postRequest.preu);
+        return BaseController.OK_MESSAGE;
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<PostBasicDTO>> searchPosts(@RequestParam String query) {
+        List<PostBasicDTO> posts = postService.searchByTitol(query);
+        return ResponseEntity.ok(posts);
+    }
+
+
 
     @GetMapping("/image/{filename:.+}")
     public ResponseEntity<InputStreamResource> download(@PathVariable("filename") String filename) {
@@ -207,8 +214,7 @@ public class PostController extends BaseController {
         public String descripcio;
         @NotNull
         public Double preu;
-        @NotNull
-        public Servei tipusServei;
     }
+
 }
 
