@@ -7,11 +7,10 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "posts")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Post implements Serializable {
     /**
      * Default value included to remove warning. Remove or modify at will. *
@@ -34,26 +33,27 @@ public class Post implements Serializable {
     @NotNull
     private String descripcio;
 
-    @NotNull
-    private Long userId;
-
     @JsonIgnore
     @ManyToOne
     private User creador;
 
+    @JsonIgnore
+    @ManyToOne
+    private Servei tipusServei;
+
     @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Collection<PostImage> images;
+    private List<PostImage> images;
 
 
     public Post() {
     }
 
-    public Post(String titol, String descripcio, Double preu, User creador) {
+    public Post(String titol, String descripcio, Double preu, User creador, Servei tipusServei) {
         this.titol = titol;
         this.descripcio = descripcio;
         this.preu = preu;
         this.creador = creador;
-        this.userId = creador.getId();
+        this.tipusServei = tipusServei;
     }
 
 
@@ -63,13 +63,18 @@ public class Post implements Serializable {
     }
 
     @JsonView(Views.Public.class)
-    public Long getUserId() {
-        return userId;
+    public String getTitol() {
+        return titol;
     }
 
     @JsonView(Views.Public.class)
-    public String getTitol() {
-        return titol;
+    public String getDescripcio() {
+        return descripcio;
+    }
+
+    @JsonView(Views.Public.class)
+    public Double getPreu() {
+        return preu;
     }
 
     @JsonView(Views.Public.class)
@@ -77,14 +82,10 @@ public class Post implements Serializable {
         return creador;
     }
 
-    public void setUser(User creador) {this.creador = creador;}
-    public void setDescripcio(String descripcio) {this.descripcio = descripcio;}
-
     @JsonView(Views.Public.class)
-    public Double getPreu() {return preu;}
-
-    @JsonView(Views.Public.class)
-    public String getDescripcio() {return descripcio;}
+    public Servei getServei() {
+        return tipusServei;
+    }
 
     @JsonView(Views.Public.class)
     public List<String> getImages() {
@@ -96,7 +97,19 @@ public class Post implements Serializable {
         return image_list;
     }
 
-    public void setImages(Collection<PostImage> images) {
+    public void setUser(User creador) {
+        this.creador = creador;
+    }
+
+    public void setDescripcio(String descripcio) {
+        this.descripcio = descripcio;
+    }
+
+    public void setServei(Servei tipusServei) {
+        this.tipusServei = tipusServei;
+    }
+
+    public void setImages(List<PostImage> images) {
         this.images = images;
     }
 }

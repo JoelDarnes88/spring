@@ -3,15 +3,12 @@ package org.udg.pds.springtodo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import org.udg.pds.springtodo.DTO.PostBasicDTO;
 import org.udg.pds.springtodo.configuration.exceptions.ServiceException;
 import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.repository.PostImageRepository;
 import org.udg.pds.springtodo.repository.PostRepository;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,17 +33,6 @@ public class PostService {
             throw new ServiceException(String.format("No existeix Post amb id = %d", id));
     }
 
-    @Transactional
-    public Post addPost(Long userId, String titol, String descripcio, Double preu) {
-        User user = userService.getUser(userId);
-        Post post = new Post(titol, descripcio, preu, user);
-        user.addPost(post);
-        postRepository.save(post);
-        return post;
-    }
-
-
-
     public List<Post> getPosts() {
         List<Post> pu = postRepository.findAll();
         if (!pu.isEmpty())
@@ -55,14 +41,13 @@ public class PostService {
             throw new ServiceException("No hi ha posts");
     }
 
-    public Collection<Post> getPostsUser(Long usuariId) {
+    public List<Post> getUserPosts(Long usuariId) {
         User creador = userService.getUser(usuariId);
-        Collection<Post> posts = creador.getOwneddPosts();
+        List<Post> posts = creador.getOwneddPosts();
         if (!posts.isEmpty())
             return posts;
         else
             throw new ServiceException("No hi ha posts");
-
     }
 
     public User getUsuari(Long postId) {
@@ -70,16 +55,16 @@ public class PostService {
     }
 
     @Transactional
-    public void deletePost(Long postId, Long userId) {
-        if (getPost(postId).getUser().getId() == userId) {
-            List<String> imgListDelete = postRepository.findById(postId).get().getImages();
-            deleteImages(imgListDelete, postId);
-            postRepository.deleteById(postId);
-        } else throw new ServiceException("No es pot eliminar el post");
+    public Post addPost(Long userId, String titol, String descripcio, Double preu, Servei tipusServei) {
+        User user = userService.getUser(userId);
+        Post post = new Post(titol, descripcio, preu, user, tipusServei);
+        user.addPost(post);
+        postRepository.save(post);
+        return post;
     }
 
     @Transactional
-    public Post updatePost(Long userId, Long postId, String titol, String descripcio, Double preu) throws Exception {
+    public Post updatePost(Long userId, Long postId, String titol, String descripcio, Double preu, Servei tipusServei) throws Exception {
         Post post = postRepository.findById(postId)
             .orElseThrow(() -> new Exception("Post not found"));
         if (!post.getUser().getId().equals(userId)) {
@@ -88,14 +73,26 @@ public class PostService {
         post.setTitol(titol);
         post.setDescripcio(descripcio);
         post.setPreu(preu);
+        post.setServei(tipusServei);
         postRepository.save(post);
         return post;
     }
 
+    @Transactional
+    public void deletePost(Long postId, Long userId) {
+        if (getPost(postId).getUser().getId() == userId) {
+            List<String> imgListDelete = postRepository.findById(postId).get().getImages();
+            deleteImages(imgListDelete, postId);
+            postRepository.deleteById(postId);
+        }
+        else throw new ServiceException("No es pot eliminar el post");
+    }
 
     @Transactional
-    public List<PostBasicDTO> searchByTitol(String titol) {
-        List<Post> posts = postRepository.findByTitolContainingIgnoreCase(titol);
+    public List<PostBasicDTO> searchPosts(String query) {
+        List<Post> posts;
+        if (!query.startsWith("#")) posts = postRepository.findByTitolContainingIgnoreCase(query);
+        else posts = postRepository.findByTipusServeiNameContainingIgnoreCase(query.substring(1));
         return posts.stream().map(PostBasicDTO::fromEntity).collect(Collectors.toList());
     }
 
