@@ -7,15 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.service.PostService;
-import org.udg.pds.springtodo.service.TagService;
-import org.udg.pds.springtodo.service.TaskService;
+import org.udg.pds.springtodo.service.ServeiService;
 import org.udg.pds.springtodo.service.UserService;
 
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,16 +32,10 @@ public class Global {
     private UserService userService;
 
     @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private TagService tagService;
-
-    @Autowired
     private PostService postService;
 
     @Autowired
-    private Environment environment;
+    private ServeiService serveiService;
 
     @Value("${spring.profiles.active}")
     private String activeProfile;
@@ -98,24 +89,24 @@ public class Global {
         if (activeProfile.equals("dev")) {
             logger.info("Starting populating database ...");
 
-            User user = userService.register("usuari", "Carles M.", "United Kingdom", "usuari@hotmail.com", "+44 123456789", "123456");
-            User user2 = userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
-            IdObject taskId = taskService.addTask("Una tasca", user.getId(), AppDateFormatter.format(ZonedDateTime.now()), AppDateFormatter.format(ZonedDateTime.now()));
-            Tag tag = tagService.addTag("ATag", "Just a tag");
-            taskService.addTagsToTask(user.getId(), taskId.getId(), new ArrayList<Long>() {{
-                add(tag.getId());
-            }});
+            List<Servei> serveis = new ArrayList<>();
+            serveis.add(serveiService.addService("Pintura", "Experiència professional per aplicar pintura a superfícies i proporcionar recobriments protectors."));
+            serveis.add(serveiService.addService("Fusteria", "Elaborar i donar forma a la fusta en diversos elements funcionals o decoratius."));
+            serveis.add(serveiService.addService("Cosir", "Cosir teixits per crear o reparar peces de vestir, tèxtils o altres articles."));
+            serveis.add(serveiService.addService("Informatica", "Assistència i solucions per a problemes tècnics relacionats amb sistemes informàtics."));
 
-            //POSTS
-            postService.addPost(user.getId(),"titol", "descripcio", 25.5);
-            postService.addPost(user.getId(),"titol2", "descripcio2", 24.5);
+            User user = userService.register("usuari", "Carles M.", "United Kingdom", "usuari@hotmail.com", "+44 123456789", "123456");
+            postService.addPost(user.getId(),"Pintura de murs", "Pintaré qualsevol mur que tinguis", 25.5, serveis.get(0));
+            postService.addPost(user.getId(),"Pintura de mobles", "Pintaré mobles i aplicaré una capa de protecció", 17.0, serveis.get(0));
+            postService.addPost(user.getId(),"Casa per ocells", "Construiré una casa d'ocells de 50x50cm", 49.5, serveis.get(1));
             Collection<Post> p = userService.getOwnedPosts(user.getId());
             this.addProductsImages(p);
 
-            postService.addPost(user2.getId(),"pintor", "pinta", 30.0);
-            postService.addPost(user2.getId(),"mecanic", "taller", 50.0);
-            Collection<Post> p2 = userService.getOwnedPosts(user2.getId());
-            this.addProductsImages(p2);
+            user = userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
+            postService.addPost(user.getId(),"Cosir un jersei", "Cossiré un jersei del color que vulguis", 38.0, serveis.get(2));
+            postService.addPost(user.getId(),"Crear compte email", "T'ajudaré a crear un compte email", 5.0, serveis.get(3));
+            p = userService.getOwnedPosts(user.getId());
+            this.addProductsImages(p);
         }
     }
     public String getBaseURL() {
