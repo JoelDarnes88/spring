@@ -7,8 +7,10 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.udg.pds.springtodo.configuration.exceptions.ControllerException;
+import org.udg.pds.springtodo.entity.Post;
 import org.udg.pds.springtodo.entity.User;
 import org.udg.pds.springtodo.entity.Views;
+import org.udg.pds.springtodo.service.PostService;
 import org.udg.pds.springtodo.service.UserService;
 
 import java.util.HashMap;
@@ -22,6 +24,9 @@ public class UserController extends BaseController {
 
   @Autowired
   UserService userService;
+
+  @Autowired
+  PostService postService;
 
   @PostMapping(path="/login")
   @JsonView(Views.Private.class)
@@ -100,11 +105,28 @@ public class UserController extends BaseController {
 
       return resultMap;
   }
+
   @PostMapping(path="/modify", consumes = "application/json")
   public String modify(HttpSession session, @Valid  @RequestBody ModifyUser mu) {
       Long userId = getLoggedUser(session);
       userService.modify(userId, mu.username, mu.name, mu.country, mu.email, mu.phone_number, mu.password, mu.about_me, mu.payment_method);
       return BaseController.OK_MESSAGE;
+  }
+
+  @PostMapping(path="/changeFavourites/{post_id}", consumes = "application/json")
+  public String changeFavourites(HttpSession session, @PathVariable("post_id") Long postId, @Valid @RequestBody Boolean addPost) {
+      Long userId = getLoggedUser(session);
+      Post p = postService.getPost(postId);
+      if(addPost) userService.addToFavourites(userId, p);
+      else userService.removeToFavourites(userId, p);
+      return BaseController.OK_MESSAGE;
+  }
+
+  @GetMapping(path="/isFavourite/{post_id}")
+  public Boolean isFavourite(HttpSession session, @PathVariable("post_id") Long postId) {
+      Long userId = getLoggedUser(session);
+      Post p = postService.getPost(postId);
+      return userService.isFavourite(userId, p);
   }
 
   @GetMapping(path="/check")
