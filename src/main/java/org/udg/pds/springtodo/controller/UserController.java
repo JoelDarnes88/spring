@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import kotlin.text.UStringsKt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.udg.pds.springtodo.configuration.exceptions.ControllerException;
@@ -14,7 +13,6 @@ import org.udg.pds.springtodo.entity.Views;
 import org.udg.pds.springtodo.service.PostService;
 import org.udg.pds.springtodo.service.UserService;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,13 +100,12 @@ public class UserController extends BaseController {
   public Map<String, String> getPaymentMethod(HttpSession session) {
       Long userId = getLoggedUser(session);
       String paymentMethod = userService.getPaymentMethod(userId);
-      // Crear un mapa para almacenar el resultado
       Map<String, String> resultMap = new HashMap<>();
       resultMap.put("paymentMethod", paymentMethod);
 
-      // Devolver el mapa como JSON en la respuesta
       return resultMap;
   }
+
   @PostMapping(path="/modify", consumes = "application/json")
   public String modify(HttpSession session, @Valid  @RequestBody ModifyUser mu) {
       Long userId = getLoggedUser(session);
@@ -125,20 +122,11 @@ public class UserController extends BaseController {
       return BaseController.OK_MESSAGE;
   }
 
-    @GetMapping(path="/isFavourite/{post_id}")
-    public Boolean isFavourite(HttpSession session, @PathVariable("post_id") Long postId) {
-        Long userId = getLoggedUser(session);
-        Post p = postService.getPost(postId);
-        return userService.isFavourite(userId, p);
-    }
-
-  @GetMapping(path="/me")
-  @JsonView(Views.Complete.class)
-  public User getUserProfile(HttpSession session) {
-
-    Long loggedUserId = getLoggedUser(session);
-
-    return userService.getUserProfile(loggedUserId);
+  @GetMapping(path="/isFavourite/{post_id}")
+  public Boolean isFavourite(HttpSession session, @PathVariable("post_id") Long postId) {
+      Long userId = getLoggedUser(session);
+      Post p = postService.getPost(postId);
+      return userService.isFavourite(userId, p);
   }
 
   @GetMapping(path="/check")
@@ -189,5 +177,4 @@ public class UserController extends BaseController {
       @NotNull
       public String payment_method;
   }
-
 }
