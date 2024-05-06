@@ -44,12 +44,14 @@ public class Post implements Serializable {
     @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<PostImage> images;
 
+    @JsonIgnore
+    @ManyToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "favorite_posts")
+    private List<User> favorited_by;
 
     public Post() {
     }
-
-    @ManyToMany(mappedBy = "favorite_posts")
-    private List<User> favorited_by;
 
     public Post(String titol, String descripcio, Double preu, User creador) {
         this.titol = titol;

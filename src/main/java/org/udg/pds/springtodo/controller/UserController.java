@@ -125,6 +125,13 @@ public class UserController extends BaseController {
       return BaseController.OK_MESSAGE;
   }
 
+    @GetMapping(path="/isFavourite/{post_id}")
+    public Boolean isFavourite(HttpSession session, @PathVariable("post_id") Long postId) {
+        Long userId = getLoggedUser(session);
+        Post p = postService.getPost(postId);
+        return userService.isFavourite(userId, p);
+    }
+
   @GetMapping(path="/me")
   @JsonView(Views.Complete.class)
   public User getUserProfile(HttpSession session) {

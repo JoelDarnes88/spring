@@ -74,6 +74,7 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "creador")
     private Collection<Post> posts;
 
+    @JsonIgnore
     @ManyToMany(
         fetch = FetchType.LAZY
     )

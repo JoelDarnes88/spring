@@ -128,6 +128,11 @@ public class UserService {
         return u;
     }
 
+    public boolean isFavourite(Long userId, Post post) {
+        User u = getUser(userId);
+        return u.getFavorites().contains(post);
+    }
+
     public List<User> searchUser(String query) {
         List<User> users;
         if (query.startsWith("@")) users = userRepository.findSimilarUsername(query.substring(1));
