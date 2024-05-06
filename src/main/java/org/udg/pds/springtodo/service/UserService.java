@@ -109,6 +109,25 @@ public class UserService {
         return nu;
     }
 
+    public User addToFavourites(Long userId, Post post) {
+        User u = getUser(userId);
+        u.addToFavorites(post);
+        userRepository.save(u);
+        return u;
+    }
+
+    public User removeToFavourites(Long userId, Post post) {
+        User u = getUser(userId);
+        u.removeToFavorites(post);
+        userRepository.save(u);
+        return u;
+    }
+
+    public boolean isFavourite(Long userId, Post post) {
+        User u = getUser(userId);
+        return u.getFavorites().contains(post);
+    }
+
     public List<User> searchUser(String query) {
         List<User> users;
         if (query.startsWith("@")) users = userRepository.findByUsernameContainingIgnoreCase(query.substring(1));

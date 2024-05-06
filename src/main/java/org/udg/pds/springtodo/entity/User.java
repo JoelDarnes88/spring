@@ -53,6 +53,17 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "creador")
     private List<Post> posts;
 
+    @JsonIgnore
+    @ManyToMany(
+        fetch = FetchType.LAZY
+    )
+    @JoinTable(
+        name = "favorites",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "post_id")
+    )
+    private List<Post> favorite_posts;
+
     public User() {
     }
 
@@ -124,6 +135,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
+    public List<Post> getFavorites() {
+        return favorite_posts;
+    }
+
     @JsonView(Views.Private.class)
     public void setUsername(String username) {
         this.username = username;
@@ -176,4 +192,14 @@ public class User implements Serializable {
         posts.size();
         return posts;
     }
+
+    public void addToFavorites(Post post){
+        favorite_posts.add(post);
+    }
+
+    public void removeToFavorites(Post post){
+        favorite_posts.remove(post);
+    }
+
+
 }

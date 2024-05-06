@@ -44,6 +44,11 @@ public class Post implements Serializable {
     @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PostImage> images;
 
+    @JsonIgnore
+    @ManyToMany(
+        fetch = FetchType.LAZY,
+        mappedBy = "favorite_posts")
+    private List<User> favorited_by;
 
     public Post() {
     }
@@ -111,5 +116,10 @@ public class Post implements Serializable {
 
     public void setImages(List<PostImage> images) {
         this.images = images;
+    }
+
+    @JsonIgnore
+    public List<User> getFavoritedBy() {
+        return favorited_by;
     }
 }
