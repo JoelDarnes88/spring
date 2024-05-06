@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import kotlin.text.UStringsKt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.udg.pds.springtodo.configuration.exceptions.ControllerException;
@@ -12,7 +11,6 @@ import org.udg.pds.springtodo.entity.User;
 import org.udg.pds.springtodo.entity.Views;
 import org.udg.pds.springtodo.service.UserService;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,11 +95,9 @@ public class UserController extends BaseController {
   public Map<String, String> getPaymentMethod(HttpSession session) {
       Long userId = getLoggedUser(session);
       String paymentMethod = userService.getPaymentMethod(userId);
-      // Crear un mapa para almacenar el resultado
       Map<String, String> resultMap = new HashMap<>();
       resultMap.put("paymentMethod", paymentMethod);
 
-      // Devolver el mapa como JSON en la respuesta
       return resultMap;
   }
   @PostMapping(path="/modify", consumes = "application/json")
@@ -109,15 +105,6 @@ public class UserController extends BaseController {
       Long userId = getLoggedUser(session);
       userService.modify(userId, mu.username, mu.name, mu.country, mu.email, mu.phone_number, mu.password, mu.about_me, mu.payment_method);
       return BaseController.OK_MESSAGE;
-  }
-
-  @GetMapping(path="/me")
-  @JsonView(Views.Complete.class)
-  public User getUserProfile(HttpSession session) {
-
-    Long loggedUserId = getLoggedUser(session);
-
-    return userService.getUserProfile(loggedUserId);
   }
 
   @GetMapping(path="/check")
@@ -168,5 +155,4 @@ public class UserController extends BaseController {
       @NotNull
       public String payment_method;
   }
-
 }
