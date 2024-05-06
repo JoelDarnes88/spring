@@ -121,4 +121,9 @@ TOTAL: 71
 * [P244-179 Android modificar imatges dels meus posts](https://pds24-4c.youtrack.cloud/issue/P244-179/Android-modificar-imatges-dels-meus-posts) 34
 * [P244-207 Spring endpoint actualizar els posts amb imatges](https://pds24-4c.youtrack.cloud/issue/P244-207/Spring-endpoint-actualizar-els-posts-amb-imatges) 8
 
-TOTAL:  131
+#### [P244-221 Com a UR vull poder veure les meves conversecions](https://pds24-4c.youtrack.cloud/issue/P244-221/Com-a-UR-vull-poder-veure-les-meves-conversecions)
+* [P244-222 Spring logica i endpoints: crear chat, enviar missatges, obtenir chats d'usuari](https://pds24-4c.youtrack.cloud/issue/P244-222/Spring-logica-i-endpoints-crear-chat-enviar-missatges-obtenir-chats-dusuari) X
+* [P244-223 Android veure els meus chats](https://pds24-4c.youtrack.cloud/issue/P244-223/Android-veure-els-meus-chats) X
+
+
+* TOTAL:  131
