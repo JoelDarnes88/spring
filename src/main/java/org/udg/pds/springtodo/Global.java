@@ -1,5 +1,6 @@
 package org.udg.pds.springtodo;
 
+import com.sun.mail.imap.protocol.MessageSet;
 import io.minio.MinioClient;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.udg.pds.springtodo.entity.*;
+import org.udg.pds.springtodo.service.ChatService;
 import org.udg.pds.springtodo.service.PostService;
 import org.udg.pds.springtodo.service.ServeiService;
 import org.udg.pds.springtodo.service.UserService;
@@ -33,6 +35,9 @@ public class Global {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private ChatService chatService;
 
     @Autowired
     private ServeiService serveiService;
@@ -102,11 +107,26 @@ public class Global {
             Collection<Post> p = userService.getOwnedPosts(user.getId());
             this.addProductsImages(p);
 
-            user = userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
-            postService.addPost(user.getId(),"Cosir un jersei", "Cossiré un jersei del color que vulguis", 38.0, serveis.get(2));
-            postService.addPost(user.getId(),"Crear compte email", "T'ajudaré a crear un compte email", 5.0, serveis.get(3));
-            p = userService.getOwnedPosts(user.getId());
+            User user2 = userService.register("user", "Monica G.", "Spain", "user@hotmail.com", "+34 123456789", "0000");
+            Post p1 = postService.addPost(user2.getId(),"Cosir un jersei", "Cossiré un jersei del color que vulguis", 38.0, serveis.get(2));
+            postService.addPost(user2.getId(),"Crear compte email", "T'ajudaré a crear un compte email", 5.0, serveis.get(3));
+            p = userService.getOwnedPosts(user2.getId());
             this.addProductsImages(p);
+
+            User user3 = userService.register("a", "Josep A.", "Spain", "usera@hotmail.com", "+34 123456789", "a");
+
+
+            //CHATS HARDCODED:
+            Chat chat1 = chatService.createChat(user, user2,p1);
+            Chat chat2 = chatService.createChat(user, user3,p1);
+
+            chatService.sendMessageDTO(chat1,user,"Hola, ¿que tal?");
+            chatService.sendMessageDTO(chat1,user2,"Be, gracies i tu");
+
+            chatService.sendMessageDTO(chat2,user,"HOLA!");
+            chatService.sendMessageDTO(chat2,user3,"Hola que tal?");
+            chatService.sendMessageDTO(chat2,user,"Es pot negociar el preu?");
+
         }
     }
     public String getBaseURL() {

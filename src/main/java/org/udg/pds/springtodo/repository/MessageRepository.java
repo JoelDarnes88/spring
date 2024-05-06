@@ -1,0 +1,14 @@
+package org.udg.pds.springtodo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
+import org.udg.pds.springtodo.entity.Chat;
+import org.udg.pds.springtodo.entity.Message;
+import org.udg.pds.springtodo.entity.Post;
+
+import java.util.List;
+
+@Component
+public interface MessageRepository extends JpaRepository<Message, Long> {
+    List<Message> findByChat(Chat chat);
+}
