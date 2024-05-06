@@ -48,6 +48,9 @@ public class Post implements Serializable {
     public Post() {
     }
 
+    @ManyToMany(mappedBy = "favorite_posts")
+    private List<User> favorited_by;
+
     public Post(String titol, String descripcio, Double preu, User creador) {
         this.titol = titol;
         this.descripcio = descripcio;
@@ -94,6 +97,11 @@ public class Post implements Serializable {
                 image_list.add(image.getUrl());
             }
         return image_list;
+    }
+
+    @JsonIgnore
+    public List<User> getFavoritedBy() {
+        return favorited_by;
     }
 
     public void setImages(Collection<PostImage> images) {
