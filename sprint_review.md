@@ -114,7 +114,7 @@ Total: 292
 ## Gourseaud Louis
 #### [P244-154 Com UR vull veure el meu perfil](https://pds24-4c.youtrack.cloud/issue/P244-154/Com-UR-vull-veure-el-meu-perfil)
 * [P244-155 Afegir el bottomNav](https://pds24-4c.youtrack.cloud/issue/P244-155/Afegir-el-bottomNav) 8
-* [P244-159 Botó per anar a SettingsFragment](https://pds24-4c.youtrack.cloud/issue/P244-159/Boto-per-anar-a-SettingsFragment) 8
+* [P244-159 Botó per anar a SettingsFragment](https://pds24-4c.youtrack.cloud/issue/P244-159/Boto-per-anar-a-SettingsFragment) 13
 
 #### [P244-65 Com UR vull poder llistar i veure el perfil d'altres usuaris](https://pds24-4c.youtrack.cloud/issue/P244-65/Com-UR-vull-poder-llistar-i-veure-el-perfil-daltres-usuaris)
 * [P244-157 Fer barra de cerca](https://pds24-4c.youtrack.cloud/issue/P244-157/Fer-barra-de-cerca) 13
@@ -122,15 +122,15 @@ Total: 292
 * [P244-164 Mostrar perfil del usuari demanat](https://pds24-4c.youtrack.cloud/issue/P244-164/Mostrar-perfil-del-usuari-demanat) 21
 
 #### [P244-182 Ensenyar els posts de l'UR segons el servei](https://pds24-4c.youtrack.cloud/issue/P244-182/Ensenyar-els-posts-de-lUR-segons-el-servei)
-* [P244-183 Fer base de dades dels serveis que pot ser un post](https://pds24-4c.youtrack.cloud/issue/P244-183/Fer-base-de-dades-dels-serveis-que-pot-ser-un-post) 21
+* [P244-183 Fer base de dades dels serveis que pot ser un post](https://pds24-4c.youtrack.cloud/issue/P244-183/Fer-base-de-dades-dels-serveis-que-pot-ser-un-post) 34
 * [P244-184 Ensenyar els posts en el perfil segons el servei](https://pds24-4c.youtrack.cloud/issue/P244-184/Ensenyar-els-posts-en-el-perfil-segons-el-servei) 34
 * [P244-209 Poder seleccionar servei a l'hora de crear o editar un post](https://pds24-4c.youtrack.cloud/issue/P244-209/Poder-seleccionar-servei-a-lhora-de-crear-o-editar-un-post) 21
 
 #### [P244-205 Millores generals](https://pds24-4c.youtrack.cloud/issue/P244-205/Millores-generals)
-* [P244-211 Poder buscar posts segons el tipus de servei](https://pds24-4c.youtrack.cloud/issue/P244-211/Poder-buscar-posts-segons-el-tipus-de-servei) 13
+* [P244-211 Poder buscar posts segons el tipus de servei](https://pds24-4c.youtrack.cloud/issue/P244-211/Poder-buscar-posts-segons-el-tipus-de-servei) 21
 * [P244-206 Afegir scroll als layouts necessaris](https://pds24-4c.youtrack.cloud/issue/P244-206/Afegir-scroll-als-layouts-necessaris) 13
 
-Total: 173
+Total: 207
 
 
 ## Arman Oleksandr
