@@ -2,27 +2,24 @@
 
 ## Massallé Richart Joan
 #### [P244-43 Com usuari no registrat, vull poder fer sign in](https://pds24-4c.youtrack.cloud/issue/P244-43/Com-usuari-no-registrat-vull-poder-fer-sign-in)
-* [P244-120 Retocar el diseny del register](https://pds24-4c.youtrack.cloud/issue/P244-120/Retocar-el-diseny-del-register) 2h
-* [P244-118 Crear botó que porti a la pàgina de sign in](https://pds24-4c.youtrack.cloud/issue/P244-118/Crear-boto-que-porti-a-la-pagina-de-sign-in) 2h
-* [P244-117 Crear la pàgina d'Android](https://pds24-4c.youtrack.cloud/issue/P244-117/Crear-la-pagina-dAndroid) 1h
-* [P244-119 Crear la logística del register](https://pds24-4c.youtrack.cloud/issue/P244-119/Crear-la-logistica-del-register) 3h
+* [P244-118 Crear botó que porti a la pàgina de sign in](https://pds24-4c.youtrack.cloud/issue/P244-118/Crear-boto-que-porti-a-la-pagina-de-sign-in) 8
+* [P244-117 Crear la pàgina d'Android](https://pds24-4c.youtrack.cloud/issue/P244-117/Crear-la-pagina-dAndroid) 5
+* [P244-119 Crear la logística del register](https://pds24-4c.youtrack.cloud/issue/P244-119/Crear-la-logistica-del-register) 13
 
 #### [P244-56 Com UR, vull poder-me loguejar](https://pds24-4c.youtrack.cloud/issue/P244-56/Com-UR-vull-poder-me-loguejar)
-* [P244-116 Retocar el diseny del login](https://pds24-4c.youtrack.cloud/issue/P244-116/Retocar-el-diseny-del-login) 2h
+* [P244-116 Retocar el diseny del login](https://pds24-4c.youtrack.cloud/issue/P244-116/Retocar-el-diseny-del-login) 8
 
-Total: 10h
+Total: 34
 
 
 ## Gourseaud Louis
 #### [P244-83 Com UR vull veure el meu perfil](https://pds24-4c.youtrack.cloud/issue/P244-83/Com-UR-vull-veure-el-meu-perfil)
-* [P244-90 Crear la base de dades amb les dades dels URs](https://pds24-4c.youtrack.cloud/issue/P244-90/Crear-la-base-de-dades-amb-les-dades-dels-URs) 4h
-* [P244-82 Crear la interfície gràfica](https://pds24-4c.youtrack.cloud/issue/P244-82/Crear-la-interficie-grafica) 9h
-* [P244-85 Ensenyar dades personals de l'UR (nom, email...)](https://pds24-4c.youtrack.cloud/issue/P244-85/Ensenyar-dades-personals-de-lUR-nom-email...) 8h
-* [P244-87 Nova activitat per canviar les dades personals de l'UR](https://pds21-0a.myjetbrains.com/youtrack/issue/P210A-12) 4h
+* [P244-90 Crear la base de dades amb les dades dels URs](https://pds24-4c.youtrack.cloud/issue/P244-90/Crear-la-base-de-dades-amb-les-dades-dels-URs) 16
+* [P244-82 Crear la interfície gràfica](https://pds24-4c.youtrack.cloud/issue/P244-82/Crear-la-interficie-grafica) 36
+* [P244-85 Ensenyar dades personals de l'UR (nom, email...)](https://pds24-4c.youtrack.cloud/issue/P244-85/Ensenyar-dades-personals-de-lUR-nom-email...) 32
+* [P244-87 Nova activitat per canviar les dades personals de l'UR](https://pds21-0a.myjetbrains.com/youtrack/issue/P210A-12) 16
 
-(Aquest últim punt sembla ser que ja s'estava fent per en Ros Roger, i per tant no el vaig acabar)
-
-Total: 25h
+Total: 100
 
 
 ## Joel Darnés Cros
@@ -61,7 +58,6 @@ Total: 21h
 TOTAL: 105
 
 
-
 # Sprint 2
 
 ## Arman Oleksandr
@@ -78,35 +74,64 @@ TOTAL: 105
 TOTAL: 71
 
 
-
 # Sprint 3
 
 ## Massallé Richart Joan
 #### [P244-43 Com usuari no registrat, vull poder fer sign in](https://pds24-4c.youtrack.cloud/issue/P244-43/Com-usuari-no-registrat-vull-poder-fer-sign-in)
-* [P244-119 Crear la logística del register](https://pds24-4c.youtrack.cloud/issue/P244-119/Crear-la-logistica-del-register) 3h
+* [P244-120 Retocar la logística del register](https://pds24-4c.youtrack.cloud/issue/P244-120/Retocar-el-diseny-del-register) 8
 
 #### [P244-97 Com a UR, vull poder canviar les dades personals de settings](https://pds24-4c.youtrack.cloud/issue/P244-97/Com-a-UR-vull-poder-canviar-les-dades-personals-de-settings)
-* [P244-161 Desenvolupar SettingsFragment](https://pds24-4c.youtrack.cloud/issue/P244-161/Desenvolupar-SettingsFragment) 5h
-* [P244-162 Desenvolupar els endopoints necessaris per cada canvi](https://pds24-4c.youtrack.cloud/issue/P244-162/Desenvolupar-els-endopoints-necessaris-per-cada-canvi) 5h
-* [P244-163 Testejar el codi i debuggar el que sigui necessari](https://pds24-4c.youtrack.cloud/issue/P244-163/Testejar-el-codi-i-debuggar-el-que-sigui-necessari) 3h
+* [P244-161 Desenvolupar SettingsFragment](https://pds24-4c.youtrack.cloud/issue/P244-161/Desenvolupar-SettingsFragment) 13
+* [P244-162 Desenvolupar els endopoints necessaris per cada canvi](https://pds24-4c.youtrack.cloud/issue/P244-162/Desenvolupar-els-endopoints-necessaris-per-cada-canvi) 13
+* [P244-163 Testejar el codi i debuggar el que sigui necessari](https://pds24-4c.youtrack.cloud/issue/P244-163/Testejar-el-codi-i-debuggar-el-que-sigui-necessari) 13
 
 #### [P244-98 Com UR però no loguejat, puc modificar la contrasenya amb el correu associat](https://pds24-4c.youtrack.cloud/issue/P244-98/Com-UR-pero-no-loguejat-puc-modificar-la-contrasenya-amb-el-correu-associat)
-* [P244-165 Generar el fragment i els elements .xml necessaris](https://pds24-4c.youtrack.cloud/issue/P244-165/Generar-el-fragment-i-els-elements-.xml-necessaris) 5h
-* [P244-166 Generar l'endpoint POST per sol·licitar el canvi de contrasenya](https://pds24-4c.youtrack.cloud/issue/P244-166/Generar-lendpoint-POST-per-sollicitar-el-canvi-de-contrasenya) 5h
-* [P244-208 Poder enviar correus](https://pds24-4c.youtrack.cloud/issue/P244-208/Poder-enviar-correus) 7h
-* [P244-167 Creació de les pàgines web pel canvi de contrasenya](https://pds24-4c.youtrack.cloud/issue/P244-167/Creacio-de-les-pagines-web-pel-canvi-de-contrasenya) 10h
-* [P244-169 Executar els canvis rebuts de la pàgina web](https://pds24-4c.youtrack.cloud/issue/P244-169/Executar-els-canvis-rebuts-de-la-pagina-web) 10h
+* [P244-165 Generar el fragment i els elements .xml necessaris](https://pds24-4c.youtrack.cloud/issue/P244-165/Generar-el-fragment-i-els-elements-.xml-necessaris) 13
+* [P244-166 Generar l'endpoint POST per sol·licitar el canvi de contrasenya](https://pds24-4c.youtrack.cloud/issue/P244-166/Generar-lendpoint-POST-per-sollicitar-el-canvi-de-contrasenya) 13
+* [P244-208 Poder enviar correus](https://pds24-4c.youtrack.cloud/issue/P244-208/Poder-enviar-correus) 34
+* [P244-167 Creació de les pàgines web pel canvi de contrasenya](https://pds24-4c.youtrack.cloud/issue/P244-167/Creacio-de-les-pagines-web-pel-canvi-de-contrasenya) 34
+* [P244-169 Executar els canvis rebuts de la pàgina web](https://pds24-4c.youtrack.cloud/issue/P244-169/Executar-els-canvis-rebuts-de-la-pagina-web) 34
 
 #### [P244-99 Com a UR, vull poder modificar els meus mètodes de pagaments des de settings](https://pds24-4c.youtrack.cloud/issue/P244-99/Com-a-UR-vull-poder-modificar-els-meus-metodes-de-pagaments-des-de-settings)
-* [P244-172 Fer les modificacions de les dades de l'usuari des de Android](https://pds24-4c.youtrack.cloud/issue/P244-172/Fer-les-modificacions-de-les-dades-de-lusuari-des-de-Android) 7h
-* [P244-173 Afegir mètode de pagament al POST "users/modify"](https://pds24-4c.youtrack.cloud/issue/P244-173/Afegir-metode-de-pagament-al-POST-users-modify) 7h
-* [P244-213 Afegir un GET al servidor per saber quin mètode de pagament s'usa](https://pds24-4c.youtrack.cloud/issue/P244-213/Afegir-un-GET-al-servidor-per-saber-quin-metode-de-pagament-susa) 3h
+* [P244-172 Fer les modificacions de les dades de l'usuari des de Android](https://pds24-4c.youtrack.cloud/issue/P244-172/Fer-les-modificacions-de-les-dades-de-lusuari-des-de-Android) 13
+* [P244-173 Afegir mètode de pagament al POST "users/modify"](https://pds24-4c.youtrack.cloud/issue/P244-173/Afegir-metode-de-pagament-al-POST-users-modify) 13
+* [P244-213 Afegir un GET al servidor per saber quin mètode de pagament s'usa](https://pds24-4c.youtrack.cloud/issue/P244-213/Afegir-un-GET-al-servidor-per-saber-quin-metode-de-pagament-susa) 13
 
 #### [P244-100 Com a UR, vull poder eliminar el compte des de settings](https://pds24-4c.youtrack.cloud/issue/P244-100/Com-a-UR-vull-poder-eliminar-el-compte-des-de-settings)
-* [P244-174 Afegir el botó de borrar Compta a Settings (Android)](https://pds24-4c.youtrack.cloud/issue/P244-174/Afegir-el-boto-de-borrar-Compta-a-Settings-Android) 3h
+* [P244-174 Afegir el botó de borrar Compta a Settings (Android)](https://pds24-4c.youtrack.cloud/issue/P244-174/Afegir-el-boto-de-borrar-Compta-a-Settings-Android) 8
 
 #### [P244-192 Millorar interfice gràfica](https://pds24-4c.youtrack.cloud/issue/P244-192/Millorar-interfice-grafica)
-* [P244-210 Icona de l'aplicació](https://pds24-4c.youtrack.cloud/issue/P244-210/Icona-de-laplicacio) 0.5h
+* [P244-210 Icona de l'aplicació](https://pds24-4c.youtrack.cloud/issue/P244-210/Icona-de-laplicacio) 2
+
+#### [P244-215 Com UR vull poder afegir un post a preferits i poder visualitzar-los](https://pds24-4c.youtrack.cloud/issue/P244-215/Com-UR-vull-poder-afegir-un-post-a-preferits-i-poder-visualitzar-los)
+* [P244-216 Que cada post tingui el seu botó d'afegir a preferits](https://pds24-4c.youtrack.cloud/issue/P244-216/Que-cada-post-tingui-el-seu-boto-dafegir-a-preferits) 13
+* [P244-217 Crear la taula que relacioni els posts amb els usuaris](https://pds24-4c.youtrack.cloud/issue/P244-217/Crear-la-taula-que-relacioni-els-posts-amb-els-usuaris) 21
+* [P244-218 Creació d'endpoints per mantenir-ho tot actualitzat (client & servidor)](https://pds24-4c.youtrack.cloud/issue/P244-218/Creacio-dendpoints-per-mantenir-ho-tot-actualitzat-client-servidor) 34
+
+Total: 292
+
+
+## Gourseaud Louis
+#### [P244-154 Com UR vull veure el meu perfil](https://pds24-4c.youtrack.cloud/issue/P244-154/Com-UR-vull-veure-el-meu-perfil)
+* [P244-155 Afegir el bottomNav](https://pds24-4c.youtrack.cloud/issue/P244-155/Afegir-el-bottomNav) 8
+* [P244-159 Botó per anar a SettingsFragment](https://pds24-4c.youtrack.cloud/issue/P244-159/Boto-per-anar-a-SettingsFragment) 8
+
+#### [P244-65 Com UR vull poder llistar i veure el perfil d'altres usuaris](https://pds24-4c.youtrack.cloud/issue/P244-65/Com-UR-vull-poder-llistar-i-veure-el-perfil-daltres-usuaris)
+* [P244-157 Fer barra de cerca](https://pds24-4c.youtrack.cloud/issue/P244-157/Fer-barra-de-cerca) 13
+* [P244-158 Endpoint per buscar perfil demanat](https://pds24-4c.youtrack.cloud/issue/P244-158/Endpoint-per-buscar-perfil-demanat) 21
+* [P244-164 Mostrar perfil del usuari demanat](https://pds24-4c.youtrack.cloud/issue/P244-164/Mostrar-perfil-del-usuari-demanat) 21
+
+#### [P244-182 Ensenyar els posts de l'UR segons el servei](https://pds24-4c.youtrack.cloud/issue/P244-182/Ensenyar-els-posts-de-lUR-segons-el-servei)
+* [P244-183 Fer base de dades dels serveis que pot ser un post](https://pds24-4c.youtrack.cloud/issue/P244-183/Fer-base-de-dades-dels-serveis-que-pot-ser-un-post) 21
+* [P244-184 Ensenyar els posts en el perfil segons el servei](https://pds24-4c.youtrack.cloud/issue/P244-184/Ensenyar-els-posts-en-el-perfil-segons-el-servei) 34
+* [P244-209 Poder seleccionar servei a l'hora de crear o editar un post](https://pds24-4c.youtrack.cloud/issue/P244-209/Poder-seleccionar-servei-a-lhora-de-crear-o-editar-un-post) 21
+
+#### [P244-205 Millores generals](https://pds24-4c.youtrack.cloud/issue/P244-205/Millores-generals)
+* [P244-211 Poder buscar posts segons el tipus de servei](https://pds24-4c.youtrack.cloud/issue/P244-211/Poder-buscar-posts-segons-el-tipus-de-servei) 13
+* [P244-206 Afegir scroll als layouts necessaris](https://pds24-4c.youtrack.cloud/issue/P244-206/Afegir-scroll-als-layouts-necessaris) 13
+
+Total: 173
+
 
 ## Arman Oleksandr
 #### [P244-176 Com UR vull poder cercar posts](https://pds24-4c.youtrack.cloud/issue/P244-176/Com-UR-vull-poder-cercar-posts)
@@ -124,6 +149,5 @@ TOTAL: 71
 #### [P244-221 Com a UR vull poder veure les meves conversecions](https://pds24-4c.youtrack.cloud/issue/P244-221/Com-a-UR-vull-poder-veure-les-meves-conversecions)
 * [P244-222 Spring logica i endpoints: crear chat, enviar missatges, obtenir chats d'usuari](https://pds24-4c.youtrack.cloud/issue/P244-222/Spring-logica-i-endpoints-crear-chat-enviar-missatges-obtenir-chats-dusuari) 13
 * [P244-223 Android veure els meus chats](https://pds24-4c.youtrack.cloud/issue/P244-223/Android-veure-els-meus-chats) 8
-
 
 * TOTAL:  152
