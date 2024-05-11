@@ -35,14 +35,14 @@ Total: 32h
 
 ## Ros Roger
 #### [P244-80 Com a UR modificar les meves settings](https://pds24-4c.youtrack.cloud/issue/P244-80/Com-a-UR-modificar-les-meves-settings)
-* [P244-122 Mode fosc](https://pds24-4c.youtrack.cloud/issue/P244-122/Mode-fosc) 3h
-* [P244-106 Creacio de Setting i modificacio](https://pds24-4c.youtrack.cloud/issue/P244-106/Creacio-de-Setting-i-modificacio) 10h
-* [P244-125 Habilitar/Deshabilitar Noticacions FrondEnd](https://pds24-4c.youtrack.cloud/issue/P244-125/Habilitar-Deshabilitar-Noticacions-FrondEnd) 2h
-* [P244-123 Canviar Nom usuari AndroidStudio](https://pds24-4c.youtrack.cloud/issue/P244-123/Canviar-Nom-usuari-AndroidStudio) 2h
-* [P244-124 Canviar contrasenya AndroidStudio](https://pds24-4c.youtrack.cloud/issue/P244-124/Canviar-contrasenya-AndroidStudio) 2h
-* [P244-102 Crear funcionalitat per canvi de password en android studio](https://pds24-4c.youtrack.cloud/issue/P244-102) 2h
+* [P244-122 Mode fosc](https://pds24-4c.youtrack.cloud/issue/P244-122/Mode-fosc) 13
+* [P244-106 Creacio de Setting i modificacio](https://pds24-4c.youtrack.cloud/issue/P244-106/Creacio-de-Setting-i-modificacio) 34
+* [P244-125 Habilitar/Deshabilitar Noticacions FrondEnd](https://pds24-4c.youtrack.cloud/issue/P244-125/Habilitar-Deshabilitar-Noticacions-FrondEnd) 5
+* [P244-123 Canviar Nom usuari AndroidStudio](https://pds24-4c.youtrack.cloud/issue/P244-123/Canviar-Nom-usuari-AndroidStudio) 5
+* [P244-124 Canviar contrasenya AndroidStudio](https://pds24-4c.youtrack.cloud/issue/P244-124/Canviar-contrasenya-AndroidStudio) 8
+* [P244-102 Crear funcionalitat per canvi de password en android studio](https://pds24-4c.youtrack.cloud/issue/P244-102) 4
 
-Total: 21h
+Total: 65
 
 
 ## Arman Oleksandr
@@ -151,3 +151,37 @@ Total: 207
 * [P244-223 Android veure els meus chats](https://pds24-4c.youtrack.cloud/issue/P244-223/Android-veure-els-meus-chats) 8
 
 * TOTAL:  152
+
+
+## Ros Roger
+#### [P244-44 Com a UR, poder veure els posts](https://pds24-4c.youtrack.cloud/issue/P244-60/Com-UR-vull-poder-crear-posts)
+* [Afegir el botó de borrar Compta a Settings (Android)](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-113) 13
+* [P244-161 Desenvolupar SettingsFragment](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-115) 5
+* [P244-162 Desenvolupar els endopoints necessaris per cada canvi](https://pds24-4c.youtrack.cloud/agiles/159-2/162-7?issue=P244-162) 5
+* Coses que vaig fer diferent vam tindre un error a la hora de la comunicacio amb el grup:
+*     - Canvi contrassenya sense correu i validacio de cotra amb seguretat minima   8
+*     - Canvi nom usuari                                                            5
+*     - Canvi correu                                                                5
+*     - LogOut                                                                      5
+#### [P244-192 Millorar interfice gràfica](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-192)
+* [P244-193 Millorar home](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-193) 13
+* [P244-197 Millorar Profile](https://pds24-4c.youtrack.cloud/issue/P244-197/Millorar-Profile) 21
+* [P244-194 Millorar posts](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-194) 5
+* [P244-225 Crear un drawable text_background](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-225) 5
+* [P244-224 Crear un drawer item](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-224) 5
+* [P244-204 Millorar app_tasks](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-204) 3
+* [P244-199 Millorar Login](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-199) 5
+* [P244-200 Millorar activity nd](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-200) 5
+* [P244-201 Millorar nav header](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-201) 3
+* [P244-229 Millorar app_bar_nd](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-229) 3
+* [P244-231 Millorar Settings](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-231) 5
+* [P244-233 Modificar Strings, colors i styles](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-233) 3
+* [P244-228 Millorar add_task](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-228) 5
+* [P244-230 Millorar el content fav](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-230) 5
+* [P244-232 Millorar Register](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-232) 5
+* [P244-226 Crear rounded_button](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-226) 3
+* [P244-227 Millorar el side_nav_bar](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-227) 5
+* [P244-202 Millorar activity_post_detall_home](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-202) 5
+* [P244-203 Millorar activity_splash_screen](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-203) 3
+
+* TOTAL: 153
