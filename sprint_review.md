@@ -23,14 +23,14 @@ Total: 100
 
 
 ## Joel Darnés Cros
-* [P244-92 Com a UR, crear una solicitud de un post][P244-130 Spring de Solicitud](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-130) 12h
-* [P244-93 Com a UR, vull poder modificar l'estat d'una solicitud (aceptar, pagament, tancar, etc.)][P244-138 Spring corresponent a modificar l'estat d'una Solicitud](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-138) 2h
-* [P244-103 Com a UR, eliminar una solicitud o xat][P244-136 Spring corresponent a eliminar una solicitud](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-136) 2h
-* [P244-63 Com UR vull veure els meus xats (sol·licituds)][P244-134 Spring corresponent a llistar els xats](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-134) 2h
-* [P244-127 Com a UR, vull poder fer el pagament d'una solicitud aceptada][P244-132 Spring de Pagament](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-132) 7h
-* [P244-64 Com UR vull poder rebre i enviar missatges d'una sol·licitud][P244-128 Spring de Missatge](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-128) 9h
+#### [P244-92 Com a UR, crear una solicitud de un post][P244-130 Spring de Solicitud](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-130) 48
+#### [P244-93 Com a UR, vull poder modificar l'estat d'una solicitud (aceptar, pagament, tancar, etc.)][P244-138 Spring corresponent a modificar l'estat d'una Solicitud](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-138) 8
+#### [P244-103 Com a UR, eliminar una solicitud o xat][P244-136 Spring corresponent a eliminar una solicitud](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-136) 8
+#### [P244-63 Com UR vull veure els meus xats (sol·licituds)][P244-134 Spring corresponent a llistar els xats](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-134) 8
+#### [P244-127 Com a UR, vull poder fer el pagament d'una solicitud aceptada][P244-132 Spring de Pagament](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-132) 28
+#### [P244-64 Com UR vull poder rebre i enviar missatges d'una sol·licitud][P244-128 Spring de Missatge](https://pds24-4c.youtrack.cloud/agiles/159-2/162-5?issue=P244-128) 36
 
-Total: 32h
+Total: 136
 
 
 ## Ros Roger
@@ -185,3 +185,11 @@ Total: 207
 * [P244-203 Millorar activity_splash_screen](https://pds24-4c.youtrack.cloud/agiles/159-2/162-9?issue=P244-203) 3
 
 * TOTAL: 153
+
+
+## Joel Darnés Cros
+#### [P244-131 Com a UR, crear una solicitud de un post, android] (https://pds24-4c.youtrack.cloud/agiles/159-2/162-7?issue=P244-131) 42
+#### [P244-139 Com a UR, vull poder modificar l'estat d'una solicitud (aceptar, pagament, tancar, etc.), android] (https://pds24-4c.youtrack.cloud/agiles/159-2/162-7?issue=P244-139) 22
+#### [P244-137 Com a UR, eliminar una solicitud o xat, android] (https://pds24-4c.youtrack.cloud/agiles/159-2/162-7?issue=P244-137) 18
+
+* TOTAL: 82
