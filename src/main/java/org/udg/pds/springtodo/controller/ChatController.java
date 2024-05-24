@@ -23,6 +23,7 @@ import org.udg.pds.springtodo.service.UserService;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping(path = "/chats")
 @RestController
@@ -40,16 +41,38 @@ public class ChatController extends BaseController {
     @Autowired
     Global global;
 
+//    @PostMapping(path="/create")
+//    public ResponseEntity<?> createChat(HttpSession session,
+//                                        @RequestParam("user1Id") Long user1Id,
+//                                        @RequestParam("user2Id") Long user2Id,@RequestParam("postId") Long postId) {
+//        User user1 = userService.getUser(user1Id);
+//        User user2 = userService.getUser(user2Id);
+//        Post p = postService.getPost(postId);
+//        Chat chat = chatService.createChat(user1, user2, p);
+//        return ResponseEntity.ok("Chat creat OK!");
+//    }
+
     @PostMapping(path="/create")
     public ResponseEntity<?> createChat(HttpSession session,
-                                        @RequestParam("user1Id") Long user1Id,
-                                        @RequestParam("user2Id") Long user2Id,@RequestParam("postId") Long postId) {
-        User user1 = userService.getUser(user1Id);
-        User user2 = userService.getUser(user2Id);
-        Post p = postService.getPost(postId);
-        Chat chat = chatService.createChat(user1, user2, p);
-        return ResponseEntity.ok("Chat creat OK!");
+                                        @RequestParam("userId") Long userId,
+                                        @RequestParam("userTargetId") Long userTargetId,
+                                        @RequestParam("postId") Long postId) {
+        User user = userService.getUser(userId);
+        User targetUser = userService.getUser(userTargetId);
+        Post post = postService.getPost(postId);
+
+        Optional<Chat> existingChat = chatService.findChatByUsersAndPost(user, targetUser, post);
+        if (existingChat.isPresent()) {
+            return ResponseEntity.ok(existingChat.get());
+        } else {
+            Chat newChat = chatService.createChat(user, targetUser, post);
+            return ResponseEntity.ok(newChat);
+        }
     }
+
+
+
+
 
     @GetMapping("/{chatId}/messages")
     public ResponseEntity<List<MessageBasicDTO>> getMessages(@PathVariable Long chatId) {
@@ -75,6 +98,17 @@ public class ChatController extends BaseController {
             return ResponseEntity.ok(chats);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @DeleteMapping("/delete/{chatId}")
+    public ResponseEntity<?> deleteChat(@PathVariable Long chatId) {
+        Chat chat = chatService.findById(chatId);
+        if (chat != null) {
+            chatService.deleteChat(chat);
+            return ResponseEntity.ok("Chat eliminat");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Chat no trobat");
         }
     }
 
