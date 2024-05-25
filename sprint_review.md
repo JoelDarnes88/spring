@@ -193,3 +193,18 @@ Total: 207
 #### [P244-137 Com a UR, eliminar una solicitud o xat, android] (https://pds24-4c.youtrack.cloud/agiles/159-2/162-7?issue=P244-137) 18
 
 * TOTAL: 82
+
+
+
+# Sprint 4
+
+## Arman Oleksandr
+#### [P244-234 Com UR vull poder contactar a un venedor des del post](https://pds24-4c.youtrack.cloud/issue/P244-234/Com-UR-vull-poder-enviar-missatges-en-el-chat)
+* [P244-236 Android poder enviar missatge en un chat](https://pds24-4c.youtrack.cloud/issue/P244-236/Android-poder-enviar-missatge-en-un-chat) 34
+
+#### [P244-235 Com UR vull poder contactar a un venedor des del post](https://pds24-4c.youtrack.cloud/issue/P244-235/Com-UR-vull-poder-contactar-a-un-venedor-des-del-post)
+* [P244-237 Android crear funcionalitat contacte en un post](https://pds24-4c.youtrack.cloud/issue/P244-237/Android-crear-funcionalitat-contacte-en-un-post) 21
+* [P244-238 Spring endpoint crear o obtenir chat existent](https://pds24-4c.youtrack.cloud/issue/P244-238/Spring-endpoint-crear-o-obtenir-chat-existent) 13
+
+
+* TOTAL: 68

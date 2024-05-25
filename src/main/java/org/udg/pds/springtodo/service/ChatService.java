@@ -11,6 +11,7 @@ import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.repository.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,7 @@ public class ChatService {
         chat.setUser(user1);
         chat.setTargetUser(user2);
         chat.setpost(post);
+        chat.setMessages(new ArrayList<>());
         return chatRepository.save(chat);
     }
 
@@ -93,4 +95,11 @@ public class ChatService {
         return chat.stream().map(ChatBasicDTO::fromEntity).collect(Collectors.toList());
     }
 
+    public Optional<Chat> findChatByUsersAndPost(User user, User targetUser, Post post) {
+        return chatRepository.findByUserAndTargetUserAndPost(user, targetUser, post)
+            .or(() -> chatRepository.findByTargetUserAndUserAndPost(targetUser, user, post));
+    }
+    public void deleteChat(Chat chat) {
+        chatRepository.delete(chat);
+    }
 }

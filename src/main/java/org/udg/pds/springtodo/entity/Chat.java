@@ -1,10 +1,12 @@
 package org.udg.pds.springtodo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Setter;
 import org.udg.pds.springtodo.DTO.MessageBasicDTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +31,8 @@ public class Chat implements Serializable {
     private Post post;
 
     @OneToMany(mappedBy = "chat")
-    private List<Message> messages;
+    @JsonManagedReference
+    private List<Message> messages = new ArrayList<>();
 
 
     public Long getId() {

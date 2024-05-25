@@ -1,5 +1,6 @@
 package org.udg.pds.springtodo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ public class Message implements Serializable {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference
     private Chat chat;
 
     private String content;
