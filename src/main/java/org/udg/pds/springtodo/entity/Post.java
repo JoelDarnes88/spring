@@ -11,11 +11,9 @@ import java.util.List;
 
 @Entity(name = "posts")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Post implements Serializable {
-    /**
-     * Default value included to remove warning. Remove or modify at will. *
-     */
-    /**  private static final long serialVersionUID = 1L; */
+    private static final long serialVersionUID = 1L;
 
     @Setter
     @Id
@@ -35,6 +33,7 @@ public class Post implements Serializable {
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "creador_id")
     private User creador;
 
     @JsonIgnore
@@ -45,10 +44,8 @@ public class Post implements Serializable {
     private List<PostImage> images;
 
     @JsonIgnore
-    @ManyToMany(
-        fetch = FetchType.LAZY,
-        mappedBy = "favorite_posts")
-    private List<User> favorited_by;
+    @ManyToMany(mappedBy = "favorite_posts")
+    private List<User> favoritedBy;
 
     public Post() {
     }
@@ -60,7 +57,6 @@ public class Post implements Serializable {
         this.creador = creador;
         this.tipusServei = tipusServei;
     }
-
 
     @JsonView(Views.Public.class)
     public Long getId() {
@@ -94,11 +90,12 @@ public class Post implements Serializable {
 
     @JsonView(Views.Public.class)
     public List<String> getImages() {
-        List<String> image_list = new ArrayList();
-        if(images != null)
-            for(PostImage image : images) {
+        List<String> image_list = new ArrayList<>();
+        if (images != null) {
+            for (PostImage image : images) {
                 image_list.add(image.getUrl());
             }
+        }
         return image_list;
     }
 
@@ -120,6 +117,6 @@ public class Post implements Serializable {
 
     @JsonIgnore
     public List<User> getFavoritedBy() {
-        return favorited_by;
+        return favoritedBy;
     }
 }

@@ -8,6 +8,7 @@ import org.udg.pds.springtodo.configuration.exceptions.ServiceException;
 import org.udg.pds.springtodo.entity.*;
 import org.udg.pds.springtodo.repository.PostImageRepository;
 import org.udg.pds.springtodo.repository.PostRepository;
+import org.udg.pds.springtodo.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,14 +17,16 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final PostImageRepository postImageRepository;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    PostImageRepository postImageRepository;
+    public PostService(PostRepository postRepository, UserRepository userRepository, PostImageRepository postImageRepository) {
+        this.postRepository = postRepository;
+        this.userRepository = userRepository;
+        this.postImageRepository = postImageRepository;
+    }
 
     public Post getPost(Long id) {
         Optional<Post> uo = postRepository.findById(id);
@@ -42,7 +45,7 @@ public class PostService {
     }
 
     public List<Post> getUserPosts(Long usuariId) {
-        User creador = userService.getUser(usuariId);
+        User creador = userRepository.findById(usuariId).orElseThrow(() -> new ServiceException("User not found"));
         List<Post> posts = creador.getOwneddPosts();
         if (!posts.isEmpty())
             return posts;
@@ -56,7 +59,7 @@ public class PostService {
 
     @Transactional
     public Post addPost(Long userId, String titol, String descripcio, Double preu, Servei tipusServei) {
-        User user = userService.getUser(userId);
+        User user = userRepository.findById(userId).orElseThrow(() -> new ServiceException("User not found"));
         Post post = new Post(titol, descripcio, preu, user, tipusServei);
         user.addPost(post);
         postRepository.save(post);
@@ -65,11 +68,8 @@ public class PostService {
 
     @Transactional
     public Post updatePost(Long userId, Long postId, String titol, String descripcio, Double preu, Servei tipusServei) throws Exception {
-        Post post = postRepository.findById(postId)
-            .orElseThrow(() -> new Exception("Post not found"));
-        if (!post.getUser().getId().equals(userId)) {
-            throw new Exception("Unauthorized to update this post");
-        }
+        Post post = postRepository.findById(postId).orElseThrow(() -> new Exception("Post not found"));
+        if (!post.getUser().getId().equals(userId)) throw new Exception("Unauthorized to update this post");
         post.setTitol(titol);
         post.setDescripcio(descripcio);
         post.setPreu(preu);
@@ -80,12 +80,13 @@ public class PostService {
 
     @Transactional
     public void deletePost(Long postId, Long userId) {
-        if (getPost(postId).getUser().getId() == userId) {
-            List<String> imgListDelete = postRepository.findById(postId).get().getImages();
-            deleteImages(imgListDelete, postId);
+        Post post = getPost(postId);
+        if (post.getUser().getId().equals(userId)) {
+            deleteImages(post.getImages(), postId);
             postRepository.deleteById(postId);
+        } else {
+            throw new ServiceException("No es pot eliminar el post");
         }
-        else throw new ServiceException("No es pot eliminar el post");
     }
 
     @Transactional
@@ -107,13 +108,12 @@ public class PostService {
     }
 
     public void deleteImages(List<String> urlsToDel, Long postId) {
-        for(String url : urlsToDel){
-            String cleanedUrl = url.replace("\"", ""); //netejar urls amb doble cometes x2
+        for (String url : urlsToDel) {
+            String cleanedUrl = url.replace("\"", ""); // netejar urls amb doble cometes x2
             List<PostImage> lImg = postImageRepository.findAllByUrl(cleanedUrl);
-            for(PostImage img : lImg){
-                Long imgId = img.getId();
-                if(img.getPostId() == postId){
-                    postImageRepository.deleteById(imgId);
+            for (PostImage img : lImg) {
+                if (img.getPostId().equals(postId)) {
+                    postImageRepository.deleteById(img.getId());
                 }
             }
         }

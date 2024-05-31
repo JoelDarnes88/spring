@@ -8,10 +8,15 @@ import org.udg.pds.springtodo.configuration.exceptions.ServiceException;
 import org.udg.pds.springtodo.entity.Post;
 import org.udg.pds.springtodo.entity.Token;
 import org.udg.pds.springtodo.entity.User;
+import org.udg.pds.springtodo.repository.PostRepository;
 import org.udg.pds.springtodo.repository.TokenRepository;
 import org.udg.pds.springtodo.repository.UserRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.mail.SimpleMailMessage;
 
@@ -23,13 +28,15 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
     private TokenRepository tokenRepository;
 
     public User matchPassword(String username, String password) {
-
         List<User> uc = userRepository.findByUsername(username);
 
-        if (uc.size() == 0) throw new ServiceException("User does not exists");
+        if (uc.size() == 0) throw new ServiceException("User does not exist");
 
         User u = uc.get(0);
 
@@ -40,11 +47,9 @@ public class UserService {
     }
 
     public User register(String username, String name, String country, String email, String phone_number, String password) {
-
         List<User> uEmail = userRepository.findByEmail(email);
         if (uEmail.size() > 0)
-            throw new ServiceException("Email already exist");
-
+            throw new ServiceException("Email already exists");
 
         List<User> uUsername = userRepository.findByUsername(username);
         if (uUsername.size() > 0)
@@ -55,7 +60,7 @@ public class UserService {
         return nu;
     }
 
-    public User forgotPassword(String email){
+    public User forgotPassword(String email) {
         email = email.replace("\"", "");
         List<User> uEmail = userRepository.findByEmail(email);
         if (uEmail.isEmpty())
@@ -73,7 +78,6 @@ public class UserService {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
 
-
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("jmasasalle.udg@gmail.com");
         message.setTo(email);
@@ -86,7 +90,7 @@ public class UserService {
 
         mailSender.send(message);
 
-        System.out.println("Mail Sent succesfully");
+        System.out.println("Mail Sent successfully");
         return null;
     }
 
@@ -97,35 +101,52 @@ public class UserService {
 
     public User modify(Long userId, String username, String name, String country, String email, String phone_number, String password, String aboutMe, String paymentMethod) {
         User nu = getUser(userId);
-        if(!username.isBlank()) nu.setUsername(username);
-        if(!name.isEmpty()) nu.setName(name);
-        if(!country.isEmpty()) nu.setCountry(country);
-        if(!email.isEmpty()) nu.setEmail(email);
-        if(!phone_number.isEmpty()) nu.setPhoneNumber(phone_number);
-        if(!password.isEmpty()) nu.setPassword(password);
-        if(!aboutMe.isEmpty()) nu.setAboutMe(aboutMe);
-        if(!paymentMethod.isEmpty()) nu.setPaymentMethod(paymentMethod);
+        if (!username.isBlank()) nu.setUsername(username);
+        if (!name.isEmpty()) nu.setName(name);
+        if (!country.isEmpty()) nu.setCountry(country);
+        if (!email.isEmpty()) nu.setEmail(email);
+        if (!phone_number.isEmpty()) nu.setPhoneNumber(phone_number);
+        if (!password.isEmpty()) nu.setPassword(password);
+        if (!aboutMe.isEmpty()) nu.setAboutMe(aboutMe);
+        if (!paymentMethod.isEmpty()) nu.setPaymentMethod(paymentMethod);
         userRepository.save(nu);
         return nu;
     }
 
-    public User addToFavourites(Long userId, Post post) {
-        User u = getUser(userId);
-        u.addToFavorites(post);
-        userRepository.save(u);
-        return u;
+    public void addToFavorites(Long userId, Long postId) {
+        User user = getUser(userId);
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ServiceException("Post not found"));
+        if (!user.getFavorites().contains(post)) {
+            user.addToFavorites(post);
+            userRepository.save(user);
+        }
     }
 
-    public User removeToFavourites(Long userId, Post post) {
-        User u = getUser(userId);
-        u.removeToFavorites(post);
-        userRepository.save(u);
-        return u;
+    public void removeFromFavorites(Long userId, Long postId) {
+        User user = getUser(userId);
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ServiceException("Post not found"));
+        if (user.getFavorites().contains(post)) {
+            user.removeToFavorites(post);
+            userRepository.save(user);
+        }
     }
 
-    public boolean isFavourite(Long userId, Post post) {
-        User u = getUser(userId);
-        return u.getFavorites().contains(post);
+    public boolean isFavorite(Long userId, Long postId) {
+        User user = getUser(userId);
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ServiceException("Post not found"));
+        return user.getFavorites().contains(post);
+    }
+
+    public List<Post> getFavoritePosts(Long userId) {
+        User user = getUser(userId);
+        List<Post> favoritePosts = user.getFavorites();
+        // Asegurarse de que los posts tienen los datos necesarios
+        favoritePosts.forEach(post -> {
+            if (post.getTitol() == null) {
+                throw new ServiceException("Post without title detected!");
+            }
+        });
+        return favoritePosts;
     }
 
     public List<User> searchUser(String query) {
@@ -140,7 +161,7 @@ public class UserService {
         if (uo.isPresent())
             return uo.get();
         else
-            throw new ServiceException(String.format("User with id = % does not exists", id));
+            throw new ServiceException(String.format("User with id = %d does not exist", id));
     }
 
     public void deleteUser(Long userId) {
@@ -148,7 +169,7 @@ public class UserService {
         userRepository.delete(u);
     }
 
-    public List<Post> getOwnedPosts (Long userId) {
+    public List<Post> getOwnedPosts(Long userId) {
         User u = this.getUser(userId);
         return u.getOwneddPosts();
     }
