@@ -8,15 +8,14 @@ import jakarta.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "users")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"email", "username"}))
+
 public class User implements Serializable {
-    /**
-     * Default value included to remove warning. Remove or modify at will. *
-     */
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -51,12 +50,11 @@ public class User implements Serializable {
     private Double wallet;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "creador")
+    @JsonIgnore  // Evitar referencia circular
     private List<Post> posts;
 
     @JsonIgnore
-    @ManyToMany(
-        fetch = FetchType.LAZY
-    )
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "favorites",
         joinColumns = @JoinColumn(name = "user_id"),
@@ -118,7 +116,6 @@ public class User implements Serializable {
     public String getPaymentMethod() {
         return payment_method;
     }
-
 
     @JsonView(Views.Public.class)
     public String getAbout_me() {
@@ -185,7 +182,9 @@ public class User implements Serializable {
         this.payment_method = payment_method;
     }
 
-    public void addPost(Post post) { posts.add(post); }
+    public void addPost(Post post) {
+        posts.add(post);
+    }
 
     @JsonView(Views.Complete.class)
     public List<Post> getOwneddPosts() {
@@ -193,13 +192,11 @@ public class User implements Serializable {
         return posts;
     }
 
-    public void addToFavorites(Post post){
+    public void addToFavorites(Post post) {
         favorite_posts.add(post);
     }
 
-    public void removeToFavorites(Post post){
+    public void removeToFavorites(Post post) {
         favorite_posts.remove(post);
     }
-
-
 }
