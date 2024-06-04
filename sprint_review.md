@@ -208,3 +208,19 @@ Total: 207
 
 
 * TOTAL: 68
+
+## Ros Roger
+#### [P244-70 Com UR vull poder veure les meves valoracions]([https://pds24-4c.youtrack.cloud/issue/P244-60/Com-UR-vull-poder-crear-posts](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-70)
+* [P244-239 Crear la Entidad FavoritePost](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-239) 13
+* [P244-241 Crear el Servicio FavoritePostService](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-241) 13
+* [P244-248 Crear la Actividad para Mostrar los Favoritos](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-248) 34
+* [P244-247 Actualizar el Código del Fragmento de Perfil](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-247) 8
+* [P244-244 Crear la interfaz de Retrofit para consumir la API](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-244) 8
+* [P244-243 Configurar Retrofit para la API REST](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-243) 8
+* [P244-242 Crear el Controlador FavoritePostController](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-242) 21
+* [P244-246 Actualizar el Fragmento de Perfil](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-246) 8
+* [P244-240 Crear el Repositorio FavoritePostRepository](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-240) 34
+* [P244-245 Entidad FavoritePost en Android](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-245) 21
+* [P244-249 Crear el Adaptador para RecyclerView (FavoritesAdapter)](https://pds24-4c.youtrack.cloud/agiles/159-2/current?issue=P244-249) 13
+
+* TOTAL: 181
