@@ -34,6 +34,8 @@ public class Chat implements Serializable {
     @JsonManagedReference
     private List<Message> messages = new ArrayList<>();
 
+    @OneToOne(mappedBy = "chat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Pagament pagament;
 
     public Long getId() {
         return id;
@@ -63,7 +65,7 @@ public class Chat implements Serializable {
         return post;
     }
 
-    public void setpost(Post post) {
+    public void setPost(Post post) {
         this.post = post;
     }
 
@@ -77,5 +79,13 @@ public class Chat implements Serializable {
 
     public List<MessageBasicDTO> getMessagesDTO() {
         return messages.stream().map(MessageBasicDTO::fromEntity).collect(Collectors.toList());
+    }
+
+    public Pagament getPagament() {
+        return pagament;
+    }
+
+    public void setPagament(Pagament pagament) {
+        this.pagament = pagament;
     }
 }

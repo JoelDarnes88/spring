@@ -60,7 +60,7 @@ public class Solicitud implements Serializable {
         this.estat = estat;
     }
 
-    @JsonView(Views.Complete.class)
+    @JsonView(Views.Public.class)
     public Collection<Missatge> getMissatges() {
         return missatges;
     }

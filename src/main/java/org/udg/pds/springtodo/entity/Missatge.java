@@ -55,7 +55,7 @@ public class Missatge implements Serializable {
         this.missatge = missatge;
     }
 
-    @JsonView(Views.Private.class)
+    @JsonView(Views.Public.class)
     public LocalDateTime getDataEnviament() {
         return dataEnviament;
     }
@@ -64,7 +64,7 @@ public class Missatge implements Serializable {
         this.dataEnviament = dataEnviament;
     }
 
-    @JsonView(Views.Private.class)
+    @JsonView(Views.Public.class)
     public Boolean getPropietari() {
         return propietari;
     }
@@ -73,7 +73,7 @@ public class Missatge implements Serializable {
         this.propietari = propietari;
     }
 
-    @JsonView(Views.Complete.class)
+    @JsonView(Views.Public.class)
     public Solicitud getSolicitud() {
         return solicitud;
     }

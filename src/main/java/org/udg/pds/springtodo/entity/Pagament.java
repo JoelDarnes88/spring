@@ -1,68 +1,125 @@
 package org.udg.pds.springtodo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 @Entity
 @Table(name = "pagaments")
 public class Pagament implements Serializable {
+    private static final long serialVersionUID = 1L;
 
+    public enum PaymentStatus {
+        PENDING,
+        COMPLETED,
+        FAILED,
+        CANCELLED,
+        REFUNDED
+    }
+
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(Views.Public.class)
     private Long id;
 
+    @Setter
     @NotNull
-    private Double preuFinal;
-
-    @NotNull
-    private Integer metode;
-
-    @OneToOne(mappedBy = "pagament")
-    private Solicitud solicitud;
-
-    public Pagament() {
-    }
-
-    public Pagament(Double preuFinal, Integer metode) {
-        this.preuFinal = preuFinal;
-        this.metode = metode;
-    }
-
+    @Column(name = "payment_method")
     @JsonView(Views.Public.class)
+    private String paymentMethod;
+
+    @Setter
+    @NotNull
+    @JsonView(Views.Public.class)
+    private Double amount;
+
+    @Setter
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @JsonView(Views.Public.class)
+    private PaymentStatus status;
+
+    @Getter
+    @Setter
+    @ManyToOne
+    @JsonView(Views.Public.class)
+    private User user;
+
+    @Getter
+    @Setter
+    @ManyToOne
+    @JsonView(Views.Public.class)
+    private User userTarget;
+
+    @Getter
+    @Setter
+    @ManyToOne
+    @JsonIgnore
+    private Chat chat;
+
     public Long getId() {
         return id;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public PaymentStatus getStatus() {
+        return status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public User getUserTarget() {
+        return userTarget;
+    }
+
+    public Chat getChat() {
+        return chat;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    @JsonView(Views.Private.class)
-    public Double getPreuFinal() {
-        return preuFinal;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
-    public void setPreuFinal(Double preuFinal) {
-        this.preuFinal = preuFinal;
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 
-    @JsonView(Views.Private.class)
-    public Integer getMetode() {
-        return metode;
+    public void setStatus(PaymentStatus status) {
+        this.status = status;
     }
 
-    public void setMetode(Integer metode) {
-        this.metode = metode;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @JsonView(Views.Complete.class)
-    public Solicitud getSolicitud() {
-        return solicitud;
+    public void setUserTarget(User userTarget) {
+        this.userTarget = userTarget;
     }
 
-    public void setSolicitud(Solicitud solicitud) {
-        this.solicitud = solicitud;
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
+
+    public void updateStatus(PaymentStatus newStatus) {
+        this.status = newStatus;
     }
 }

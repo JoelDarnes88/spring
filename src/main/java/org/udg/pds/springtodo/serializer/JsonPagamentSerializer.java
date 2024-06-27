@@ -16,13 +16,13 @@ public class JsonPagamentSerializer extends JsonSerializer<Pagament> {
         gen.writeStartObject();
 
         gen.writeNumberField("id", pagament.getId());
-        gen.writeNumberField("preuFinal", pagament.getPreuFinal());
-        gen.writeNumberField("metode", pagament.getMetode());
+        gen.writeNumberField("amount", pagament.getAmount());
+        gen.writeStringField("payment_method", pagament.getPaymentMethod());
+        gen.writeStringField("status", pagament.getStatus().name());
 
-        // Si vols incloure informació addicional o relacionada, pots fer-ho aquí.
-        if (pagament.getSolicitud() != null) {
-            gen.writeObjectFieldStart("solicitud");
-            gen.writeNumberField("id", pagament.getSolicitud().getId());
+        if (pagament.getChat() != null) {
+            gen.writeObjectFieldStart("chat");
+            gen.writeNumberField("id", pagament.getChat().getId());
             gen.writeEndObject();
         }
 

@@ -1,27 +1,24 @@
 package org.udg.pds.springtodo.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.udg.pds.springtodo.DTO.ChatBasicDTO;
 import org.udg.pds.springtodo.DTO.MessageBasicDTO;
-import org.udg.pds.springtodo.DTO.PostBasicDTO;
 import org.udg.pds.springtodo.Global;
-import org.udg.pds.springtodo.entity.*;
-import org.udg.pds.springtodo.repository.ChatRepository;
-import org.udg.pds.springtodo.repository.PostImageRepository;
-import org.udg.pds.springtodo.repository.UserRepository;
+import org.udg.pds.springtodo.configuration.exceptions.ServiceException;
+import org.udg.pds.springtodo.entity.Chat;
+import org.udg.pds.springtodo.entity.Message;
+import org.udg.pds.springtodo.entity.Pagament;
+import org.udg.pds.springtodo.entity.Post;
+import org.udg.pds.springtodo.entity.User;
 import org.udg.pds.springtodo.service.ChatService;
+import org.udg.pds.springtodo.service.PagamentService;
 import org.udg.pds.springtodo.service.PostService;
 import org.udg.pds.springtodo.service.UserService;
 
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,35 +28,24 @@ public class ChatController extends BaseController {
 
     @Autowired
     private ChatService chatService;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private PostService postService;
-    UserRepository userRepository;
-    ChatRepository chatRepository;
 
     @Autowired
-    Global global;
+    private PagamentService pagamentService;
 
-//    @PostMapping(path="/create")
-//    public ResponseEntity<?> createChat(HttpSession session,
-//                                        @RequestParam("user1Id") Long user1Id,
-//                                        @RequestParam("user2Id") Long user2Id,@RequestParam("postId") Long postId) {
-//        User user1 = userService.getUser(user1Id);
-//        User user2 = userService.getUser(user2Id);
-//        Post p = postService.getPost(postId);
-//        Chat chat = chatService.createChat(user1, user2, p);
-//        return ResponseEntity.ok("Chat creat OK!");
-//    }
+    @Autowired
+    private Global global;
 
     @PostMapping(path="/create")
-    public ResponseEntity<?> createChat(HttpSession session,
-                                        @RequestParam("userId") Long userId,
-                                        @RequestParam("userTargetId") Long userTargetId,
-                                        @RequestParam("postId") Long postId) {
-        User user = userService.getUser(userId);
-        User targetUser = userService.getUser(userTargetId);
-        Post post = postService.getPost(postId);
+    public ResponseEntity<?> createChat(HttpSession session, @RequestBody CreateChatRequest createChatRequest) {
+        User user = userService.getUser(createChatRequest.userId);
+        User targetUser = userService.getUser(createChatRequest.userTargetId);
+        Post post = postService.getPost(createChatRequest.postId);
 
         Optional<Chat> existingChat = chatService.findChatByUsersAndPost(user, targetUser, post);
         if (existingChat.isPresent()) {
@@ -70,9 +56,13 @@ public class ChatController extends BaseController {
         }
     }
 
-
-
-
+    @PostMapping("/{chatId}/addPagament")
+    public ResponseEntity<Pagament> addPagamentToChat(HttpSession session, @PathVariable Long chatId, @RequestBody PagamentRequest pagamentRequest) {
+        Long userId = getLoggedUser(session); // Ensure the user is authenticated
+        String paymentMethod = userService.getPaymentMethod(userId); // Get payment method of the logged-in user
+        Pagament pagament = pagamentService.addPagamentToChat(chatId, userId, pagamentRequest.amount, paymentMethod);
+        return ResponseEntity.ok(pagament);
+    }
 
     @GetMapping("/{chatId}/messages")
     public ResponseEntity<List<MessageBasicDTO>> getMessages(@PathVariable Long chatId) {
@@ -90,7 +80,6 @@ public class ChatController extends BaseController {
     }
 
     @GetMapping("/user/me")
-    //@JsonView(Views.Public.class)
     public ResponseEntity<List<ChatBasicDTO>> getUserChats(HttpSession session) {
         try {
             Long id = getLoggedUser(session);
@@ -110,6 +99,17 @@ public class ChatController extends BaseController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Chat no trobat");
         }
+    }
+
+    static class CreateChatRequest {
+        public Long userId;
+        public Long userTargetId;
+        public Long postId;
+    }
+
+    static class PagamentRequest {
+        public Long chatId;
+        public Double amount;
     }
 
 }
